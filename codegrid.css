@@ -1,0 +1,265 @@
+:root {
+    --border-color-js:green;
+    --border-color-css:#FF945A;
+    --COLOR-BLUE: rgb(0, 183, 255);
+    --COLOR-green: rgb(0, 183, 255);
+    --color-b :#5e7aac;
+}
+
+.module-grid-container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 40% 20% 50%;
+
+    grid-template-areas: "module-CodeModule module-HeaderText" "module-CodeModule module-Question" 
+    "module-CodeMain module-Answer" ;
+  }
+  .module-grid-container h2 {
+    border: 0px !important;
+
+  }
+
+  
+  .module-CodeModule { grid-area: module-CodeModule;
+     border-bottom: 5px solid var(--border-color-css);  
+     border-right: 5px solid var(--border-color-css);    
+     background-color: whitesmoke ;
+  }
+
+    .module-CodeMain { grid-area: module-CodeMain;    
+          border-right: 5px solid var(--border-color-css);  background-color: whitesmoke ;
+ }
+  
+        .module-CodeModule pre ,   .module-CodeMain pre {
+            padding: 0px !important;;
+            padding-top: 20px !important;
+            padding-left: 30px !important;
+        }
+
+
+  .module-HeaderText { grid-area: module-HeaderText;     background-color: #505363; 
+    height: 100%; display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-top: 5px solid  var(--border-color-css);  */
+    border-bottom: 5px solid var(--border-color-css);
+} 
+  
+.module-HeaderText h2{
+    font-size: 26px !important;
+    line-height: 140%;
+    padding-top: 8px !important;
+    padding-bottom: 7px !important;
+   
+   
+}
+
+.headerCODE {
+    color: var(--border-color-css) !important;
+}
+
+  .module-Question { grid-area: module-Question;
+display: flex;
+    align-items: center;
+    justify-content: center; color:white;   background-color: #505363; 
+    border-bottom: 5px solid var(--border-color-css); 
+
+
+}
+  
+  .module-Answer { grid-area: module-Answer;  background-color: #505363; }
+
+
+.slide.prism.over {
+    padding: 0 0px 0 !important;
+}
+
+.slide h2 { 
+    color: var(--border-color-css);
+}
+
+.vertical-grid-container {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 10% 20% 70%;
+    height: 100%;
+   grid-template-areas: "vertical-PlaceCodeHere vertical-HeaderText "
+   "vertical-PlaceCodeHere vertical-Question" 
+   "vertical-PlaceCodeHere vertical-Answer"
+  }
+  
+  .vertical-PlaceCodeHere { grid-area: vertical-PlaceCodeHere;   border-right: 5px solid var(--border-color-css);
+    background-color: whitesmoke ;
+    display: flex;
+    align-items: center; }
+  
+  .vertical-HeaderText { 
+      grid-area: vertical-HeaderText;  
+   
+    background-color: #505363; 
+    height: 100%; display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 5px solid var(--border-color-css);
+}
+
+    .vertical-HeaderText h2{
+        font-size: 18px !important;;
+        padding-top: 8px !important;
+        padding-bottom: 7px !important;
+        color: var(--border-color-css) !important;
+       
+    }
+  
+  .vertical-Question {    display: flex;
+    align-items: center;
+    justify-content: center; grid-area: vertical-Question; color:white;   background-color: #505363; 
+    border-bottom: 5px solid var(--border-color-css);
+}
+  
+  .vertical-Answer { grid-area: vertical-Answer; background-color: #505363; }
+  .vertical-Answer pre  {
+
+  }
+
+  .grid-container-new {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 20% 80% 0% ;
+
+    grid-template-areas: "HeaderTitle" "PlaceCodeHere" "AnswerCode" ;
+  }
+
+.grid-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 10% 90% 0% ;
+
+    grid-template-areas: "HeaderTitle" "PlaceCodeHere" "AnswerCode" ;
+  }
+
+  .HeaderTitle { 
+    padding-left: 10px;
+    grid-area: HeaderTitle;
+    background-color: #505363;
+    background-color: var(--color-b);
+
+}
+.HeaderTitle  h2 {
+    font-size: 28px !important;;
+    padding-top: 14px !important;
+    color: var(--border-color-css) !important;
+    background-color: transparent;
+    border: none;
+}
+  .PlaceCodeHere { grid-area: PlaceCodeHere; 
+
+    border-top: 5px solid var(--border-color-css);
+    background-color: whitesmoke ;
+    display: flex;
+    align-items: center;
+}
+
+.PlaceCodeHere pre{
+padding-top: 1em !important;
+
+}
+
+.AnswerCode {
+    display: grid;
+
+    grid-template-areas: "pytanie" "odpowiedz";
+    grid-area: AnswerCode;
+    border-top: 5px solid var(--border-color-css);
+    background-color: var(--color-b);
+    color:white;
+  }
+.pytanie {
+    padding-top: 5px;
+    padding-bottom: 5px;;
+    grid-area: pytanie;
+    padding-left: 30px;;
+    
+}
+.odpowiedz {
+    grid-area: odpowiedz;
+    margin-left: 30px;;
+    margin-bottom: 20px;;
+    
+}
+
+.odpowiedz.full {
+    background-color: whitesmoke;
+    padding-left: 30px;
+    color: #07a;
+}
+
+.AnswerCode pre{
+
+    border-left: 30px solid var(--border-color-css);
+    font-size: 30px;overflow: hidden; background-color: white;   
+}
+
+.odpowiedz pre{
+    width: 90%;
+    font-size: 30px;overflow: hidden; background-color: white;  
+}
+
+.odpowiedz pre code{
+
+    line-height: 13px !important;padding-top: 15px; color: var(--border-color-css) !important;
+   
+}
+
+.AnswerCode h3{
+    font-size: 27px;;
+}
+
+
+.Place {
+    background-color: #505363;
+    grid-area: Place; 
+
+}
+
+
+.bhgry {
+    background-color: #818487;
+}
+
+.Main-grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25% 50% 25%;
+    width: 100%;
+    height: 100%;
+   grid-template-areas: "Background1" "Main-Text" "Background2"
+  }
+  
+  .Main-Text { grid-area: Main-Text; display: flex;  justify-content: center;  align-items: center; }
+  
+  .Main-Text  h2 {
+      color: white !important;
+      text-align: center;
+      padding: 0px !important;;
+  }
+
+  .Main-Text a {
+      color: var(--border-color-css);
+      font-size: 150%;;
+      text-decoration: none !important;
+  }
+
+  .Main-Background1 {     border-bottom: 5px solid var(--border-color-css);    background-color: #505363; }
+  
+  .Main-Background2 {     border-top: 5px solid var(--border-color-css);  background-color: #505363; }
+
+  .slide ol.nonumbers>li::before {
+    padding-right: .2em;
+    width: 1em;
+    content: "";
+
+}
