@@ -2432,6 +2432,16 @@
             </div>
         </div>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/trans_01.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors">8-3<br /><span>Pytanie o transakcje w czasie sesji
+        </span></span>
+    </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
@@ -2440,7 +2450,7 @@
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        --stwórzmy celowo trazakcje która nie jest zamknięta
+                        --stwórzmy celowo trasakcje która nie jest zamknięta
 
                         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
                         GO
@@ -2452,7 +2462,6 @@
                         FROM HumanResources.Department
                         INSERT INTO HumanResources.Department (Name, GroupName)
                         VALUES ('Test', 'QA');
-                        
                     </code>
                 </pre>
             </div>
@@ -2475,7 +2484,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-2 Wyświetlanie najstarszej tranzakcji</h2>
+                <h2 class="headerCODE">8-3-1 Pytanie o transakcje w czasie sesji</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
@@ -2484,8 +2493,6 @@
                         SELECT session_id, transaction_id, is_user_transaction, is_local
                         FROM sys.dm_tran_session_transactions
                         WHERE is_user_transaction = 1;
-                        GO
-                        
                     </code>
                 </pre>
             </div>
@@ -2508,7 +2515,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-2 Wyświetlanie najstarszej tranzakcji</h2>
+                <h2 class="headerCODE">8-3-2 Pytanie o transakcje w czasie sesji</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
@@ -2520,36 +2527,6 @@
                         WHERE c.most_recent_session_id = 51;
                         --use the session_id returned by the previous query
                         GO
-                        
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-2 Wyświetlanie najstarszej tranzakcji</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        --w innym oknie query
-                        SELECT s.text
-                        FROM sys.dm_exec_connections c
-                        CROSS APPLY sys.dm_exec_sql_text(c.most_recent_sql_handle) s
-                        WHERE c.most_recent_session_id = 51;
-                        --use the session_id returned by the previous query
-                        GO
-                        
                     </code>
                 </pre>
             </div>
@@ -2572,7 +2549,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-3 Wyświetlanie najstarszej tranzakcji</h2>
+                <h2 class="headerCODE">8-3-3 Pytanie o transakcje w czasie sesji</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
@@ -2597,8 +2574,8 @@
                         WHEN 8 THEN 'been rolled back'
                         END
                         FROM sys.dm_tran_active_transactions
-                        WHERE transaction_id = 12969598; -- change this value to the transaction_id returned in the
-                        first
+                        WHERE transaction_id = 12969598; 
+                        -- change this value to the transaction_id returned in the first
                         --query of this recipe
                         GO
                         
@@ -2621,26 +2598,27 @@
             <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
         </figure>
     </section>
+
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-3 Pytanie o transakcje w czasie sesji</h2>
+                <h2 class="headerCODE">8-3-4 Pytanie o transakcje w czasie sesji</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
                         --stwórzmy celowo trazakcje która nie jest zamknięta
 
-                        SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-                        GO
-                        USE AdventureWorks2014;
-                        GO
+                        --SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+                        --GO
+                        --USE AdventureWorks2014;
+                        --GO
 
-                        BEGIN TRAN
-                        SELECT *
-                        FROM HumanResources.Department
-                        INSERT INTO HumanResources.Department (Name, GroupName)
-                        VALUES ('Test', 'QA'); -->
+                        --BEGIN TRAN
+                        --SELECT *
+                        --FROM HumanResources.Department
+                        --INSERT INTO HumanResources.Department (Name, GroupName)
+                        --VALUES ('Test', 'QA'); -->
                         
                         ROLLBACK TRANSACTION;
                     </code>
@@ -2656,64 +2634,110 @@
             </div>
         </div>
     </section>
-    <section class="slide creamGrey  compact">
-        <h2>Locking</h2>
-        <ol class="nonumbers">
-            <li class="next">Shared lock</li>
-            <li class="next">Intent lock</li>
-        </ol>
+    <section class="slide creamB">
+        <span class="shout colors">8-4<br /><span>Zobaczmy aktywność blokującą
+        </span></span>
     </section>
     <section class="slide creamGrey  compact">
         <h2>Locking</h2>
         <ol class="nonumbers">
-            <li class="next">Update lock</li>
-        </ol>
-    </section>
-    <section class="slide creamGrey  compact">
-        <h2>Locking</h2>
-        <ol class="nonumbers">
-            <li class="next">Exclusive lock</li>
-            <li class="next">Schema modification</li>
+            <li class="next">Shared lock : Dane mogą być odczytane, ale niezmienione gdy ten lock istnieje</li>
+            <li class="next">Intent lock : Tworzy on kolejkę która ustala kolejność połączeń jak ich prawa do odczytu i zapisu</li>
         </ol>
     </section>
     <section class="slide creamGrey  compact">
         <h2>Locking</h2>
         <ol class="nonumbers">
-            <li class="next">Key-range</li>
+            <li class="next">Update lock : Jeżeli jest modyfikacja ten lock staje się Exclusive lock. Jeżeli tak nie jest to staje się on Shared Lock</li>
+        </ol>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>Locking</h2>
+        <ol class="nonumbers">
+            <li class="next">Exclusive lock: Blokuje on jakikolwiek dostęp. Może on działać niejawnie przy INSET,DELETE, UPDATE</li>
+            <li class="next">Schema modification : Lock gdy modyfikujesz schemat tabelki</li>
+        </ol>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>Locking</h2>
+        <ol class="nonumbers">
+            <li class="next">Key-range : Lock blokujący wybrany zakres rekordów bazując na kluczu. Jeżeli robisz UPDATE między rokiem 2011-2012 to te rekordy będą zablokowane</li>
+        </ol>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>Locking</h2>
+        <ol class="nonumbers">
+            <li class="next">Schema stability : Lock który się tworzy w trakcie kompilacji zapytania. Blokuje on zmiany schemy na tabelce</li>
+            <li class="next">Bulk update : Lock dla dużych operacji kopiowania. Operacje te są szybkie, ale redukują one współbieżność w danej tabeli</li>
         </ol>
     </section>
     <section class="slide creamGrey  compact">
         <h2>SQL Server Lock Resources</h2>
         <ol class="nonumbers">
-            <li class="next">Allocation unit</li>
-            <li class="next">Application</li>
-            <li class="next">Database</li>
+            <li class="next">Allocation unit : Zbiory pages</li>
+            <li class="next">Application : Zasób określony przez aplikacje</li>
+            <li class="next">Database : całą bazę danych</li>
         </ol>
     </section>
     <section class="slide creamGrey  compact">
         <h2>SQL Server Lock Resources</h2>
         <ol class="nonumbers">
-            <li class="next">Extent</li>
-            <li class="next">File</li>
-            <li class="next">HOBT</li>
+            <li class="next">Extent : Alokacja 8 przyległych 8KB danych lub index pages</li>
+            <li class="next">File : Cały plik bazo danowy</li>
+            <li class="next">HOBT : Sterta (tabela bez clustered index czy b-tree)</li>
         </ol>
     </section>
     <section class="slide creamGrey  compact">
         <h2>SQL Server Lock Resources</h2>
         <ol class="nonumbers">
-            <li class="next">Metadata</li>
-            <li class="next">Object</li>
-            <li class="next">Page</li>
+            <li class="next">Metadata : System metadanych</li>
+            <li class="next">Object : Objekt w bazie danych (tabelka,widok, procedura, funkcja) </li>
+            <li class="next">Page : 8kb blok danych albo page index</li>
         </ol>
     </section>
     <section class="slide creamGrey  compact">
         <h2>SQL Server Lock Resources</h2>
         <ol class="nonumbers">
-            <li class="next">Key</li>
-            <li class="next">Table</li>
+            <li class="next">Key : Blokowanie wierszy tak aby nie było fantomowych odczytów. Zwany również jako key-range-lock</li>
+            <li class="next">Table : Tabelka</li>
         </ol>
     </section>
-
+    <section class="slide creamGrey  compact">
+        <h2>SQL Server Lock Resources</h2>
+        <ol class="nonumbers">
+            <li class="next">RID : Blokowanie wiersza</li>
+        </ol>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>Nie wszystkie locki są kompatybilne między sobą.
+        </span></span>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>Inny lock nie może zostać umieszczony gdy zasób ma na sobie lock exclusive
+        </span></span>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors">Inne transakcje muszą czekać bądź dostać timeout aby exclusive lock został zwoliony<span>
+        </span></span>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors">Jak to działa?<span>
+        </span></span>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>Jak to działa?</h2>
+        <ol class="nonumbers">
+            <li class="next">Locki zajmują przestrzeń w pamięci</li>
+            <li class="next">Jeśli pamięci nam zabraknie to wtedy SQL Server konwertuje wiele locków na jeden duży</li>
+            <li class="next">Cierpi na tym współbieżność</li>
+        </ol>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>Jak to działa?</h2>
+        <ol class="nonumbers">
+            <li class="next">Możesz zablokować eskalację lock lub ustawić jego poziom</li>
+        </ol>
+    </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
@@ -2726,7 +2750,6 @@
                         BEGIN TRAN
                         SELECT ProductID, ModifiedDate
                         FROM Production.ProductDocument WITH (TABLOCKX);
-                        
                     </code>
                 </pre>
             </div>
@@ -2744,7 +2767,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-4 Zobaczyć Aktywność blokująca</h2>
+                <h2 class="headerCODE">8-4-1 Zobaczyć Aktywność blokująca</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
@@ -2780,6 +2803,10 @@
             <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
         </figure>
     </section>
+    <section class="slide creamB">
+        <span class="shout colors">8-5<br /><span>Kontrola na blokowaniem Tabelki
+        </span></span>
+    </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
@@ -2813,9 +2840,9 @@
     <section class="slide creamGrey  compact">
         <h2>LOCK_ESCALATION =</h2>
         <ol class="nonumbers">
-            <li class="next">TABLE,</li>
-            <li class="next">AUTO</li>
-            <li class="next">DISABLE</li>
+            <li class="next">TABLE : Domyślna.Eskalacja do poziomu tabelki . Całej bezwględu na to czy jest ona partycjonowana</li>
+            <li class="next">AUTO : Ustawia eskalacje do poziomu partycji jeżeli tabela jest partycjonowana. Innaczej cała tabelka</li>
+            <li class="next">DISABLE : Usuwa eskalacje</li>
         </ol>
     </section>
     <section class="slide prism over bhgry">
@@ -2846,19 +2873,28 @@
             </div>
         </div>
     </section>
+    <section class="slide creamB">
+        <span class="shout colors">8-6<br /><span>Konfiguracja poziomu sesji transakcynej
+        </span></span>
+    </section>
     <section class="slide creamGrey  compact">
         <h2>ANSI/ISO SQL definiuje 4 typy interakcji pomiędzy tranzakcjami</h2>
         <ol class="nonumbers">
-            <li class="next">Dirty reads:</li>
-            <li class="next">Nonrepeatable reads:</li>
-            <li class="next">Phantom reads:</li>
-            <li class="next">Lost updates:</li>
+            <li class="next">Dirty reads: Następuje gdy transakcje aktualizuje wiersz, a druga transakcja go odczyta zanim pierwsza transakcja się zakończy lub stwierdzi, że chce cofnąć swoją transakcje</li>
+            <li class="next">Nonrepeatable reads: Różne wyniki otrzymamy w zależności od tego czy przeczytamy dane przed czy po UPDATE</li>
+        </ol>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>ANSI/ISO SQL definiuje 4 typy interakcji pomiędzy tranzakcjami</h2>
+        <ol class="nonumbers">
+            <li class="next">Phantom reads: Wykonujemy dwa takie same odczyty. W międzyczasie kasujemy rekord i to sprawia, że dwa odczyty dają różne rezultaty</li>
+            <li class="next">Lost updates: Co jeśli mamy dwa polecenia UPDATE? Wygrywa ten który zajdzie później</li>
         </ol>
     </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-6 Kontrolowanie Lock na Tabelce</h2>
+                <h2 class="headerCODE">8-6 Konfiguracja poziomu sesji transakcynej</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
@@ -2886,37 +2922,143 @@
     <section class="slide creamGrey  compact">
         <h2>SQL Server Isolation Levelsi</h2>
         <ol class="nonumbers">
-            <li class="next">READ COMMITTED</li>
-        </ol>
-    </section>
-    <section class="slide creamGrey  compact">
-        <h2>SQL Server Isolation Levelsi</h2>
-        <ol class="nonumbers">
-            <li class="next">READ UNCOMMITTED </li>
-        </ol>
-    </section>
-    <section class="slide creamGrey  compact">
-        <h2>SQL Server Isolation Levelsi</h2>
-        <ol class="nonumbers">
-            <li class="next">REPEATABLE READ</li>
-        </ol>
-    </section>
-    <section class="slide creamGrey  compact">
-        <h2>SQL Server Isolation Levelsi</h2>
-        <ol class="nonumbers">
-            <li class="next">SERIALIZABLE </li>
-        </ol>
-    </section>
-    <section class="slide creamGrey  compact">
-        <h2>SQL Server Isolation Levelsi</h2>
-        <ol class="nonumbers">
-            <li class="next">SNAPSHOT</li>
+            <li class="next">READ COMMITTED (domyślny) : Nie potwierdzone dane nie są odczytywane. S
+                hared lock jest używany.
+                Insert czy modyfikacje są możliwe na tej tabelce tak długo jak nie operuja one na wierszach z 1 transakcji
+            </li>
         </ol>
     </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-6 Konfiguracja sesji transakcynej</h2>
+                <h2 class="headerCODE">8-6 READ COMMITTED</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        session1> BEGIN;
+                        session1> SELECT firstname FROM names WHERE id = 7;
+                        Aaron
+                        
+                        session2> BEGIN;
+                        session2> SELECT firstname FROM names WHERE id = 7;
+                        Aaron
+                        session2> UPDATE names SET firstname = 'Bob' WHERE id = 7;
+                        session2> SELECT firstname FROM names WHERE id = 7;
+                        Bob
+                        session2> COMMIT;
+                        
+                        session1> SELECT firstname FROM names WHERE id = 7;
+                        Bob
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>SQL Server Isolation Levelsi</h2>
+        <ol class="nonumbers">
+            <li class="next">READ UNCOMMITTED : To najmniej restrekcyjny lock. Użyteczny gdy chcesz skorzystać z transakcji na danych które wiesz, że są operowane tylko przez Ciebie</li>
+        </ol>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>SQL Server Isolation Levelsi</h2>
+        <ol class="nonumbers">
+            <li class="next">REPEATABLE READ : Odczyty są blokowane. Insert,Update,Delete mogą być wykonane na zbiorze na którym transakcja nie operuje</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-6 REPEATABLE READ</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        session1> BEGIN;
+                        session1> SELECT firstname FROM names WHERE id = 7;
+                        Aaron
+                        
+                        session2> BEGIN;
+                        session2> SELECT firstname FROM names WHERE id = 7;
+                        Aaron
+                        session2> UPDATE names SET firstname = 'Bob' WHERE id = 7;
+                        session2> SELECT firstname FROM names WHERE id = 7;
+                        Bob
+                        session2> COMMIT;
+                        
+                        session1> SELECT firstname FROM names WHERE id = 7;
+                        Aaron
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>SQL Server Isolation Levelsi</h2>
+        <ol class="nonumbers">
+            <li class="next">SERIALIZABLE : Najbardziej restrykcyjny. Range lock jest umieszczony na podstawie rezutatu wyszukiwania. Kasowanie,Aktualizacje są blokowane</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-6 SERIALIZABLE</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        session1> BEGIN;
+                        session1> SELECT firstname FROM names WHERE id = 7;
+                        Aaron
+                        
+                        session2> BEGIN;
+                        session2> SELECT firstname FROM names WHERE id = 7;
+                        Aaron
+                        session2> UPDATE names SET firstname = 'Bob' WHERE id = 7;
+                        session2> ...
+                        session2> ...
+                        
+                        session1> END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>SQL Server Isolation Levels</h2>
+        <ol class="nonumbers">
+            <li class="next">SNAPSHOT : Każda transakcja ma swoją kopie na której może pracować</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-6 Konfiguracja poziomu sesji transakcynej</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
@@ -3206,13 +3348,25 @@
         </div>
     </section>
     <section class="slide creamB">
+        <span class="shout colors">8-7<br /><span>Szukanie blokady i jej usuowanie
+        </span></span>
+    </section>
+    <section class="slide creamB">
         <span class="shout colors"><span>Blokowanie
         </span></span>
     </section>
     <section class="slide creamGrey  compact">
         <h2>Dlaczego blokowanie może nastąpić</h2>
         <ol class="nonumbers">
-            <li class="next">...</li>
+            <li class="next">Jeżeli tabelka nie ma indeksów wtedy SQL Server może blokować całą tabelkę</li>
+            <li class="next">Aplikacja trzyma transakcje otwartą czekaja na interakcje z użytkownikiem</li>
+        </ol>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>Dlaczego blokowanie może nastąpić</h2>
+        <ol class="nonumbers">
+            <li class="next">Zapytanie ustawia lock na całej tabelce mimo iż operują na kilku rekordach</li>
+            <li class="next">Zdarzają transakcje które robią dużą ilość aktualizacji</li>
         </ol>
     </section>
     <section class="slide prism over bhgry">
@@ -3238,524 +3392,29 @@
         </div>
     </section>
 
-
-
-
-
-
-
-
-
-
-    <section class="slide creamB">
-        <span class="shout colors"><span>8. Inserty, Updaty, Delety
-        </span></span>
-    </section>
-
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-1 Insert nowego wiersza</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        INSERT INTO Production.Location
-                        (Name, CostRate, Availability)
-                        VALUES ('Wheel Storage', 11.25, 80.00) ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-2 Insert : Określanie wartości domyślnych</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        INSERT Production.Location
-                        (Name,
-                        CostRate,
-                        Availability,
-                        ModifiedDate)
-                        VALUES ('Wheel Storage 3',
-                        11.25,
-                        80.00,
-                        DEFAULT) ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-2-1 Insert : Określanie wartości domyślnych</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        INSERT INTO Person.Address
-                        (AddressLine1,
-                        AddressLine2,
-                        City,
-                        StateProvinceID,
-                        PostalCode)
-                        VALUES ('15 Wake Robin Rd',
-                        DEFAULT,
-                        'Sudbury',
-                        30,
-                        '01776') ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-3 INSERT : Napisanie kolumny IDENTITY</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        SET IDENTITY_INSERT HumanResources.Department ON;
-
-                        INSERT HumanResources.Department (DepartmentID, Name, GroupName)
-                        VALUES (17, 'Database Services', 'Information Technology');
-
-                        SET IDENTITY_INSERT HumanResources.Department OFF;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-4 INSERT : Generowanie GUID</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        INSERT Purchasing.ShipMethod
-                        (Name,
-                        ShipBase,
-                        ShipRate,
-                        rowguid)
-                        VALUES ('MIDDLETON CARGO TS1',
-                        8.99,
-                        1.22,
-                        NEWID());
-
-                        SELECT rowguid,
-                        Name
-                        FROM Purchasing.ShipMethod
-                        WHERE Name = 'MIDDLETON CARGO TS1';
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-5 INSERT : na podstawie Rezultatów do zapytania query</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        INSERT Purchasing.ShipMethod
-                        (Name,
-                        ShipBase,
-                        ShipRate,
-                        rowguid)
-                        VALUES ('MIDDLETON CARGO TS1',
-                        8.99,
-                        1.22,
-                        NEWID());
-
-                        SELECT rowguid,
-                        Name
-                        FROM Purchasing.ShipMethod
-                        WHERE Name = 'MIDDLETON CARGO TS1';
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-6 INSERT : na podstawie Rezultatów z Procedury</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        CREATE PROCEDURE dbo.usp_SEL_Production_TransactionHistory
-                        @ModifiedStartDT DATETIME,
-                        @ModifiedEndDT DATETIME
-                        AS
-                        SELECT TransactionID,
-                        ProductID,
-                        ReferenceOrderID,
-                        ReferenceOrderLineID,
-                        TransactionDate,
-                        TransactionType,
-                        Quantity,
-                        ActualCost,
-                        ModifiedDate
-                        FROM Production.TransactionHistory
-                        WHERE ModifiedDate BETWEEN @ModifiedStartDT
-                        AND @ModifiedEndDT
-                        AND TransactionID NOT IN (
-                        SELECT TransactionID
-                        FROM Production.TransactionHistoryArchive) ;
-                        GO
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-6-1 INSERT : na podstawie Rezultatów z Procedury</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        INSERT Production.TransactionHistoryArchive
-                            (TransactionID,
-                            ProductID,
-                            ReferenceOrderID,
-                            ReferenceOrderLineID,
-                            TransactionDate,
-                            TransactionType,
-                            Quantity,
-                            ActualCost,
-                            ModifiedDate)
-                        EXEC dbo.usp_SEL_Production_TransactionHistory '2013-09-01', '2013-09-02' ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-7 INSERT : Wielu wierszy na raz gdy wartości są znane</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        CREATE TABLE HumanResources.Degree
-                        (
-                        DegreeID INT NOT NULL
-                        IDENTITY(1, 1)
-                        PRIMARY KEY,
-                        DegreeName VARCHAR(30) NOT NULL,
-                        DegreeCode VARCHAR(5) NOT NULL,
-                        ModifiedDate DATETIME NOT NULL
-                        ) ;
-                        GO
-
-                        INSERT INTO HumanResources.Degree
-                        (DegreeName, DegreeCode, ModifiedDate)
-                        VALUES ('Bachelor of Arts', 'B.A.', GETDATE()),
-                        ('Bachelor of Science', 'B.S.', GETDATE()),
-                        ('Master of Arts', 'M.A.', GETDATE()),
-                        ('Master of Science', 'M.S.', GETDATE()),
-                        ('Associate" s Degree', 'A.A.', GETDATE()) ;
-                        GO
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-8 INSERT : Wierszy i zwrócenie tego co się umieściło</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        INSERT Purchasing.ShipMethod
-                        (Name, ShipBase, ShipRate)
-                        OUTPUT INSERTED.ShipMethodID, INSERTED.Name,
-                        INSERTED.rowguid, INSERTED.ModifiedDate
-                        VALUES ('MIDDLETON CARGO TS11', 10, 10),
-                        ('MIDDLETON CARGO TS12', 10, 10),
-                        ('MIDDLETON CARGO TS13', 10, 10) ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-9 Update : Pojedyńczy wiersz bądź zestaw wierszy</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        UPDATE &#x3C;table_or_view_name&#x3E;
-                        SET column_name = {expression | DEFAULT | NULL} [ ,...n ]
-                        WHERE &#x3C;search_condition&#x3E;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-9 Update : Pojedyńczy wiersz bądź zestaw wierszy</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        UPDATE Sales.SpecialOffer
-                        SET DiscountPct = 0.15
-                        WHERE SpecialOfferID = 10 ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-10 Update : Używając drugiej tabelki jako źródła danych</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        UPDATE &#x3C;table_or_view_name | table_or_view_alias&#x3E;
-                            SET column_name = {expression | DEFAULT | NULL} [ ,...n ]
-                            FROM &#x3C;table_source&#x3E;
-                            WHERE &#x3C;search_condition&#x3E;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-10 Update : Używając drugiej tabelki jako źródła danych</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        UPDATE c
-                        SET Quantity = 2,
-                        ModifiedDate = GETDATE()
-                        FROM Sales.ShoppingCartItem c
-                        INNER JOIN Production.Product p
-                        ON c.ProductID = p.ProductID
-                        WHERE p.Name = 'Full-Finger Gloves, M '
-                        AND c.Quantity > 2 ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-11 Update : Aktualizacja i zwórcenie rekordów które się zmieniły</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        UPDATE Sales.SpecialOffer
-                        SET DiscountPct *= 1.05
-                        OUTPUT inserted.SpecialOfferID,
-                        deleted.DiscountPct AS old_DiscountPct,
-                        inserted.DiscountPct AS new_DiscountPct
-                        WHERE Category = 'Customer' ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-11 Update : Aktualizacja i zwórcenie rekordów które się zmieniły</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        UPDATE Sales.SpecialOffer
-                        SET DiscountPct *= 1.05
-                        OUTPUT inserted.SpecialOfferID,
-                        deleted.DiscountPct AS old_DiscountPct,
-                        inserted.DiscountPct AS new_DiscountPct
-                        WHERE Category = 'Customer' ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide cream  compact">
-        <h2>8-12 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
-        <ol>
-            <li class="next">varchar(max)</li>
-            <li class="next">nvarchar(max)</li>
-            <li class="next">varbinary(max)</li>
-            <li class="next">Te typy danych mogą zajmować 2^31-1 bajtów czyli 2GB</li>
+    <section class="slide creamGrey  compact">
+        <h2>KILL Command Arguments</h2>
+        <ol class="nonumbers">
+            <li class="next">SPID : ID Sesji którą chcemy zamknać</li>
+            <li class="next">UOW : ID transakcji</li>
+            <li class="next">WITH STATUSONLY : Dostaniesz estymacje ile potrwa cofinięce blokującej transakcji</li>
         </ol>
     </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-12 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuowanie</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        UPDATE &#x3C;table_or_view_name&#x3E;
-                        SET column_name.WRITE (expression, (@Offset, @Length)
-                        FROM &#x3C;table_source&#x3E;
-                        WHERE &#x3C;search_condition&#x3E;
+                        --na jednym oknie
+                        USE AdventureWorks2014;
+                        GO
+                        BEGIN TRAN
+                        UPDATE Production.ProductInventory
+                        SET Quantity = 400
+                        WHERE ProductID = 1 AND LocationID = 1;
                     </code>
                 </pre>
             </div>
@@ -3772,16 +3431,18 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-12 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuowanie</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        CREATE TABLE dbo.RecipeChapter
-                        (
-                        ChapterID INT NOT NULL CONSTRAINT PK_RecipeChapter PRIMARY KEY CLUSTERED,
-                        Chapter VARCHAR(MAX) NOT NULL
-                        ) ;
+                        --w drugim oknie
+                        USE AdventureWorks2014;
+                        GO
+                        BEGIN TRAN
+                        UPDATE Production.ProductInventory
+                        SET Quantity = 406
+                        WHERE ProductID = 1 AND LocationID = 1;
                     </code>
                 </pre>
             </div>
@@ -3798,17 +3459,103 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-13 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuowanie</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        INSERT INTO dbo.RecipeChapter
-                        (ChapterID,
-                        Chapter)
-                        VALUES (1,
-                        'At the beginning of each chapter you will notice
-                        that basic concepts are covered first.') ;
+                        --w trzecim oknie
+                        SELECT blocking_session_id, wait_duration_ms, session_id
+                        FROM sys.dm_os_waiting_tasks
+                        WHERE blocking_session_id IS NOT NULL;
+                        GO
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/trans_02.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuowanie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        --w czwartym oknie
+                        SELECT t.text
+                        FROM sys.dm_exec_connections c
+                        CROSS APPLY sys.dm_exec_sql_text (c.most_recent_sql_handle) t
+                        WHERE c.session_id = 55; --użyj blocking_session_id z poprzedniego zapytania
+                        GO
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/trans_03.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuowanie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        KILL 55;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors">8-8<br /><span>Konfiguranie tego jak długo wyrażenie może przetrzymać lock, aż do jego wyzwolenia
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-8 Konfiguranie tego jak długo wyrażenie może przetrzymać lock, aż do jego wyzwolenia</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        SET LOCK_TIMEOUT timeout_period
                     </code>
                 </pre>
             </div>
@@ -3825,16 +3572,12 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-13 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+                <h2 class="headerCODE">8-8 Konfiguranie tego jak długo wyrażenie może przetrzymać lock, aż do jego wyzwolenia</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        UPDATE dbo.RecipeChapter
-                        SET Chapter.WRITE('In addition to the basics, this chapter will also provide recipes
-                        that can be used in your day to day development and administration.',
-                        NULL, NULL)
-                        WHERE ChapterID = 1 ;
+                        SET LOCK_TIMEOUT timeout_period
                     </code>
                 </pre>
             </div>
@@ -3851,15 +3594,17 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-13 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+                <h2 class="headerCODE">8-8-1 Konfiguranie tego jak długo wyrażenie może przetrzymać lock, aż do jego wyzwolenia</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        UPDATE dbo.RecipeChapter
-                        SET Chapter.WRITE('daily', CHARINDEX('day to day', Chapter) - 1,
-                        LEN('day to day'))
-                        WHERE ChapterID = 1 ;
+                        USE AdventureWorks2014;
+                        GO
+                        BEGIN TRAN
+                        UPDATE Production.ProductInventory
+                        SET Quantity = 400
+                        WHERE ProductID = 1 AND LocationID = 1;
                     </code>
                 </pre>
             </div>
@@ -3876,14 +3621,162 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-13 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+                <h2 class="headerCODE">8-8-2 Konfiguranie tego jak długo wyrażenie może przetrzymać lock, aż do jego wyzwolenia</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        SELECT Chapter
-                        FROM dbo.RecipeChapter
-                        WHERE ChapterID = 1;
+                        USE AdventureWorks2014;
+                        GO
+                        SET LOCK_TIMEOUT 5000;
+                        UPDATE Production.ProductInventory
+                        SET Quantity = 406
+                        WHERE ProductID = 1 AND LocationID = 1;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>Deadlock
+        </span></span>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>Jak Deadlock może nastąpić?</h2>
+        <ol class="nonumbers">
+            <li class="next">Aplikacja sięga do tabelek za każdym razem w innej kolejności. Zakładając, że masz takie dwie sesje to mogą one wzajemnie się zablokować</li>
+            <li class="next">Aplikacja ma transakcje które są długie i operują na dużej liczbie rekordów</li>
+            <li class="next">Eskalacja na dwóch sesjach spowodowała deadlock</li>
+        </ol>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors">8-9<br /><span>Szukanie deadlock-u poprzez Trace Flag
+        </span></span>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>Chociaż w przypadku deadlock-ów bardziej byś skorzystał z "SQL Profiler"
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-9 Szukanie deadlock-u poprzez Trace Flag</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        DBCC TRACEON ( trace# [ ,...n ][ ,-1 ] ) [ WITH NO_INFOMSGS ]
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>DBCC TRACEON Command Arguments</h2>
+        <ol class="nonumbers">
+            <li class="next">trace# : flaga do śledzenia</li>
+            <li class="next">-1 : poziom dostępności flagi</li>
+            <li class="next">WITH NO_INFOMSGS : ogranicza informację w DBCC</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-9 Szukanie deadlock-u poprzez Trace Flag</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        DBCC TRACESTATUS ( [ [ trace# [,...n ]][,][ -1 ]]) [ WITH NO_INFOMSGS ]
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>DBCC TRACESTATUS Command Arguments</h2>
+        <ol class="nonumbers">
+            <li class="next">trace# [,...n ]]: flaga do śledzenia</li>
+            <li class="next">-1 : poziom dostępności flagi</li>
+            <li class="next">WITH NO_INFOMSGS : ogranicza informację w DBCC</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-9 Szukanie deadlock-u poprzez Trace Flag</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        DBCC TRACEOFF ( trace# [ ,.. .n ] [ , -1 ] ) [ WITH NO_INFOMSGS ]
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamGrey  compact">
+        <h2>DBCC TRACEOFF Command Arguments</h2>
+        <ol class="nonumbers">
+            <li class="next">trace# [,...n ]]: flaga do wyłączenia</li>
+            <li class="next">-1 : poziom dostępności flagi</li>
+            <li class="next">WITH NO_INFOMSGS : ogranicza informację w DBCC</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-9 Szukanie deadlock-u poprzez Trace Flag</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        --w pierwszym oknie
+                        USE AdventureWorks2014;
+                        GO
+                        SET NOCOUNT ON;
+                        WHILE 1=1
+                        BEGIN
+                        BEGIN TRANSACTION
+                        UPDATE Purchasing.Vendor
+                        SET CreditRating = 1
+                        WHERE BusinessEntityID = 1494;
+                        UPDATE Purchasing.Vendor
+                        SET CreditRating = 2
+                        WHERE BusinessEntityID = 1492;
+                        COMMIT TRANSACTION
+                        EN
                     </code>
                 </pre>
             </div>
@@ -3900,12 +3793,26 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-13 Delete : Kasowanie</h2>
+                <h2 class="headerCODE">8-9 Szukanie deadlock-u poprzez Trace Flag</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        DELETE Production.Example_ProductProductPhoto ;
+                        --w pierwszym oknie
+                        USE AdventureWorks2014;
+                        GO
+                        SET NOCOUNT ON;
+                        WHILE 1=1
+                        BEGIN
+                        BEGIN TRANSACTION
+                        UPDATE Purchasing.Vendor
+                        SET CreditRating = 1
+                        WHERE BusinessEntityID = 1494;
+                        UPDATE Purchasing.Vendor
+                        SET CreditRating = 2
+                        WHERE BusinessEntityID = 1492;
+                        COMMIT TRANSACTION
+                        END
                     </code>
                 </pre>
             </div>
@@ -3922,14 +3829,55 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-13 Delete : Kasowanie</h2>
+                <h2 class="headerCODE">8-9 Szukanie deadlock-u poprzez Trace Flag</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        DELETE Production.Example_ProductProductPhoto
-                        WHERE ProductID NOT IN (SELECT ProductID
-                        FROM Production.Product) ;
+                        DBCC TRACEON (1222, -1)
+                        GO
+                        DBCC TRACESTATUS
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors">8-10<br /><span>Szukanie deadlock-u poprzez Extended Events
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-10 Szukanie deadlock-u poprzez Extended Events</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        --pierwsze okno
+                        USE AdventureWorks2014;
+                        GO
+                        SET NOCOUNT ON;
+                        SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+                        WHILE 1=1
+                        BEGIN
+                        BEGIN TRAN
+                        UPDATE Purchasing.Vendor
+                        SET CreditRating = 1
+                        WHERE BusinessEntityID = 1494;
+                        UPDATE Purchasing.Vendor
+                        SET CreditRating = 2
+                        WHERE BusinessEntityID = 1492;
+                        COMMIT TRAN
+                        END
                     </code>
                 </pre>
             </div>
@@ -3946,15 +3894,26 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-14 Delete : Kasowanie wierszy i zwórcenie skasowanych rekordów</h2>
+                <h2 class="headerCODE">8-10 Szukanie deadlock-u poprzez Extended Events</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        DELETE
-                        FROM HumanResources.Example_JobCandidate
-                        OUTPUT deleted.JobCandidateID
-                        WHERE JobCandidateID < 5 ;
+                        --drugie okno
+                        USE AdventureWorks2014;
+                        GO
+                        SET NOCOUNT ON;
+                        WHILE 1=1
+                        BEGIN
+                        BEGIN TRANSACTION
+                        UPDATE Purchasing.Vendor
+                        SET CreditRating = 2
+                        WHERE BusinessEntityID = 1492;
+                        UPDATE Purchasing.Vendor
+                        SET CreditRating = 1
+                        WHERE BusinessEntityID = 1494;
+                        COMMIT TRANSACTION
+                        END
                     </code>
                 </pre>
             </div>
@@ -3971,113 +3930,25 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-15 Delete : Kasowanie wierszy szybko (Truncating)</h2>
+                <h2 class="headerCODE">8-10 Szukanie deadlock-u poprzez Extended Events</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        //TRUNCATE TABLE table_name ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-16 Merge : (Inserting, Updating, and/or Deleting
-                    Values)</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        MERGE
-                        [ INTO ] &#x3C;target_table&#x3E; [ [ AS ] table_alias ]
-                        USING &#x3C;table_source&#x3E; [ [ AS ] table_alias ]
-                        ON &#x3C;merge_search_condition&#x3E;
-                        [ WHEN MATCHED [ AND &#x3C;clause_search_condition&#x3E; ]
-                            THEN &#x3C;merge_matched&#x3E; ] [ ...n ]
-                            [ WHEN NOT MATCHED [ BY TARGET ] [ AND &#x3C;clause_search_condition&#x3E; ]
-                            THEN &#x3C;merge_not_matched&#x3E; ]
-                            [ WHEN NOT MATCHED BY SOURCE [ AND &#x3C;clause_search_condition&#x3E; ]
-                            THEN &#x3C;merge_matched&#x3E; ] [ ...n ]
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-16 Merge : (Inserting, Updating, and/or Deleting
-                    Values)</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        CREATE TABLE Sales.LastCustomerOrder
-                        (
-                        CustomerID INT,
-                        SalesOrderID INT,
-                        CONSTRAINT pk_LastCustomerOrder PRIMARY KEY CLUSTERED (CustomerId)
-                        ) ;
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-16 Merge : (Inserting, Updating, and/or Deleting
-                    Values)</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 45px !important;">
-                        DECLARE @CustomerID INT = 100,
-                        @SalesOrderID INT = 101 ;
+                        --trzecie okno
 
-                        MERGE INTO Sales.LastCustomerOrder AS tgt
-                        USING
-                        (SELECT @CustomerID AS CustomerID,
-                        @SalesOrderID AS SalesOrderID
-                        ) AS src
-                        ON tgt.CustomerID = src.CustomerID
-                        WHEN MATCHED
-                        THEN UPDATE
-                        SET SalesOrderID = src.SalesOrderID
-                        WHEN NOT MATCHED
-                        THEN INSERT (
-                        CustomerID,
-                        SalesOrderID
-                        )
-                        VALUES (src.CustomerID,
-                        src.SalesOrderID) ;
+                        CREATE EVENT SESSION [Deadlock] ON SERVER
+                        ADD EVENT sqlserver.lock_deadlock(
+                        ACTION(sqlserver.database_name,sqlserver.plan_handle,sqlserver.sql_text)),
+                        ADD EVENT sqlserver.xml_deadlock_report
+                        ADD TARGET package0.event_file(SET filename=N'D:\Deadlock.xel')
+                        --Ensure the file path exists and permissions are set or change the path.
+
+                        WITH (STARTUP_STATE=ON)
+                        GO
+                        ALTER EVENT SESSION Deadlock
+                        ON SERVER
+                        STATE = START;
                     </code>
                 </pre>
             </div>
@@ -4094,19 +3965,45 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-16 Merge : (Inserting, Updating, and/or Deleting
-                    Values)</h2>
+                <h2 class="headerCODE">8-10 Szukanie deadlock-u poprzez Extended Events</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        CREATE TABLE Sales.LargestCustomerOrder
-                        (
-                        CustomerID INT,
-                        SalesOrderID INT,
-                        TotalDue MONEY,
-                        CONSTRAINT pk_LargestCustomerOrder PRIMARY KEY CLUSTERED (CustomerId)
-                        );
+                        --czwarte okno
+
+                        SELECT TargetData AS DeadlockGraph
+                        FROM
+                        (SELECT CAST(event_data AS xml) AS TargetData
+                        FROM sys.fn_xe_file_target_read_file('D:\Deadlock*.xel',NULL,NULL, NULL)
+                        )AS Data
+                        WHERE TargetData.value('(event/@name)[1]', 'varchar(50)') = 'xml_deadlock_report';
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors">8-11<br /><span>Ustawienie priorytet do Deadlock
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-11 Ustawienie priorytet do Deadlock</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        SET DEADLOCK_PRIORITY { LOW | NORMAL | HIGH | <numeric-priority> }
                     </code>
                 </pre>
             </div>
@@ -4123,70 +4020,12 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-17  Umieszczanie danych po OUTPUT</h2>
+                <h2 class="headerCODE">8-11 Ustawienie priorytet do Deadlock</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 45px !important;">
-                        -- Create a table variable to hold the output data
-                        -- This could be a temporary or a permanent table.
-                        DECLARE @dml_output TABLE (
-                        MergeAction VARCHAR(6),
-                        DeletedCustomerID INTEGER,
-                        DeletedSalesOrderID INTEGER,
-                        DeletedTotalDue MONEY,
-                        InsertedCustomerID INTEGER,
-                        InsertedSalesOrderID INTEGER,
-                        InsertedTotalDue MONEY
-                        );
-                        -- Insert into the holding table
-                        INSERT INTO @dml_output
-                        (MergeAction,
-                        DeletedCustomerID,
-                        DeletedSalesOrderID,
-                        DeletedTotalDue,
-                        InsertedCustomerID,
-                        InsertedSalesOrderID,
-                        InsertedTotalDue
-                        )
-                        -- SELECT from a table source
-                        SELECT *
-                        -- The FROM clause needs to be a derived table
-                        -- The output columns are its output. FROM (
-                        MERGE INTO Sales.LargestCustomerOrder AS tgt
-                        USING
-                        (SELECT 100 AS CustomerID,
-                        205 AS SalesOrderID,
-                        2500.00 AS TotalDue
-                        ) AS src
-                        ON tgt.CustomerID = src.CustomerID
-                        WHEN MATCHED AND tgt.TotalDue < src.TotalDue
-                        THEN UPDATE
-                        SET SalesOrderID = src.SalesOrderID
-                        , TotalDue = src.TotalDue
-                        WHEN NOT MATCHED
-                        THEN INSERT (
-                        CustomerID,
-                        SalesOrderID,
-                        TotalDue
-                        )
-                        VALUES (src.CustomerID,
-                        src.SalesOrderID,
-                        src.TotalDue)
-                        OUTPUT
-                        $ACTION,
-                        DELETED.*,
-                        INSERTED.*
-                        -- Define the derived table's output column
-                        ) dt(MergeAction,
-                        DeletedCustomerID,
-                        DeletedSalesOrderID,
-                        DeletedTotalDue,
-                        InsertedCustomerID,
-                        InsertedSalesOrderID,
-                        InsertedTotalDue);
-                        SELECT *
-                        FROM @dml_output;
+                        SET DEADLOCK_PRIORITY { LOW | NORMAL | HIGH | [numeric-priority] }
                     </code>
                 </pre>
             </div>
@@ -4200,6 +4039,54 @@
             </div>
         </div>
     </section>
+    <section class="slide creamGrey  compact">
+        <h2>SET DEADLOCK_PRIORITY Command Arguments</h2>
+        <ol class="nonumbers">
+            <li class="next">LOW : Ustawiasz obecne połączenie jako niski powód do deadlock-ui>
+            <li class="next">NORMAL : SQL Server oceni które połączenie trzeba cofnąć</li>
+            <li class="next">HIGH : Ustawiasz wysokie ryzko deadlock-u chyba, że inne połączenie też jest HIGH</li>
+            <li class="next">[numeric-priority] : Twoja liczba od -10 do 10</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-11 Ustawienie priorytet do Deadlock</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        USE AdventureWorks2014;
+                        GO
+                        SET NOCOUNT ON;
+                        SET DEADLOCK_PRIORITY LOW;
+
+                        WHILE 1=1
+                        BEGIN
+                        BEGIN TRANSACTION
+                        UPDATE Purchasing.Vendor
+                        SET CreditRating = 1
+                        WHERE BusinessEntityID = 1492;
+                        UPDATE Purchasing.Vendor
+                        SET CreditRating = 2
+                        WHERE BusinessEntityID = 1494;
+                        COMMIT TRANSACTION
+                        END
+                        GO
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="slide creamB">
         <span class="shout colors"><span>9. Pracowanie ze stringami
         </span></span>
@@ -5758,6 +5645,964 @@
         </div>
     </section>
 
+
+
+
+    <section class="slide creamB">
+        <span class="shout colors"><span>10. Inserty, Updaty, Delety
+        </span></span>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-1 Insert nowego wiersza</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        INSERT INTO Production.Location
+                        (Name, CostRate, Availability)
+                        VALUES ('Wheel Storage', 11.25, 80.00) ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-2 Insert : Określanie wartości domyślnych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        INSERT Production.Location
+                        (Name,
+                        CostRate,
+                        Availability,
+                        ModifiedDate)
+                        VALUES ('Wheel Storage 3',
+                        11.25,
+                        80.00,
+                        DEFAULT) ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-2-1 Insert : Określanie wartości domyślnych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        INSERT INTO Person.Address
+                        (AddressLine1,
+                        AddressLine2,
+                        City,
+                        StateProvinceID,
+                        PostalCode)
+                        VALUES ('15 Wake Robin Rd',
+                        DEFAULT,
+                        'Sudbury',
+                        30,
+                        '01776') ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-3 INSERT : Napisanie kolumny IDENTITY</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        SET IDENTITY_INSERT HumanResources.Department ON;
+
+                        INSERT HumanResources.Department (DepartmentID, Name, GroupName)
+                        VALUES (17, 'Database Services', 'Information Technology');
+
+                        SET IDENTITY_INSERT HumanResources.Department OFF;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-4 INSERT : Generowanie GUID</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        INSERT Purchasing.ShipMethod
+                        (Name,
+                        ShipBase,
+                        ShipRate,
+                        rowguid)
+                        VALUES ('MIDDLETON CARGO TS1',
+                        8.99,
+                        1.22,
+                        NEWID());
+
+                        SELECT rowguid,
+                        Name
+                        FROM Purchasing.ShipMethod
+                        WHERE Name = 'MIDDLETON CARGO TS1';
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-5 INSERT : na podstawie Rezultatów do zapytania query</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        INSERT Purchasing.ShipMethod
+                        (Name,
+                        ShipBase,
+                        ShipRate,
+                        rowguid)
+                        VALUES ('MIDDLETON CARGO TS1',
+                        8.99,
+                        1.22,
+                        NEWID());
+
+                        SELECT rowguid,
+                        Name
+                        FROM Purchasing.ShipMethod
+                        WHERE Name = 'MIDDLETON CARGO TS1';
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-6 INSERT : na podstawie Rezultatów z Procedury</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        CREATE PROCEDURE dbo.usp_SEL_Production_TransactionHistory
+                        @ModifiedStartDT DATETIME,
+                        @ModifiedEndDT DATETIME
+                        AS
+                        SELECT TransactionID,
+                        ProductID,
+                        ReferenceOrderID,
+                        ReferenceOrderLineID,
+                        TransactionDate,
+                        TransactionType,
+                        Quantity,
+                        ActualCost,
+                        ModifiedDate
+                        FROM Production.TransactionHistory
+                        WHERE ModifiedDate BETWEEN @ModifiedStartDT
+                        AND @ModifiedEndDT
+                        AND TransactionID NOT IN (
+                        SELECT TransactionID
+                        FROM Production.TransactionHistoryArchive) ;
+                        GO
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-6-1 INSERT : na podstawie Rezultatów z Procedury</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        INSERT Production.TransactionHistoryArchive
+                            (TransactionID,
+                            ProductID,
+                            ReferenceOrderID,
+                            ReferenceOrderLineID,
+                            TransactionDate,
+                            TransactionType,
+                            Quantity,
+                            ActualCost,
+                            ModifiedDate)
+                        EXEC dbo.usp_SEL_Production_TransactionHistory '2013-09-01', '2013-09-02' ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-7 INSERT : Wielu wierszy na raz gdy wartości są znane</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        CREATE TABLE HumanResources.Degree
+                        (
+                        DegreeID INT NOT NULL
+                        IDENTITY(1, 1)
+                        PRIMARY KEY,
+                        DegreeName VARCHAR(30) NOT NULL,
+                        DegreeCode VARCHAR(5) NOT NULL,
+                        ModifiedDate DATETIME NOT NULL
+                        ) ;
+                        GO
+
+                        INSERT INTO HumanResources.Degree
+                        (DegreeName, DegreeCode, ModifiedDate)
+                        VALUES ('Bachelor of Arts', 'B.A.', GETDATE()),
+                        ('Bachelor of Science', 'B.S.', GETDATE()),
+                        ('Master of Arts', 'M.A.', GETDATE()),
+                        ('Master of Science', 'M.S.', GETDATE()),
+                        ('Associate" s Degree', 'A.A.', GETDATE()) ;
+                        GO
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-8 INSERT : Wierszy i zwrócenie tego co się umieściło</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        INSERT Purchasing.ShipMethod
+                        (Name, ShipBase, ShipRate)
+                        OUTPUT INSERTED.ShipMethodID, INSERTED.Name,
+                        INSERTED.rowguid, INSERTED.ModifiedDate
+                        VALUES ('MIDDLETON CARGO TS11', 10, 10),
+                        ('MIDDLETON CARGO TS12', 10, 10),
+                        ('MIDDLETON CARGO TS13', 10, 10) ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-9 Update : Pojedyńczy wiersz bądź zestaw wierszy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        UPDATE &#x3C;table_or_view_name&#x3E;
+                        SET column_name = {expression | DEFAULT | NULL} [ ,...n ]
+                        WHERE &#x3C;search_condition&#x3E;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-9 Update : Pojedyńczy wiersz bądź zestaw wierszy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        UPDATE Sales.SpecialOffer
+                        SET DiscountPct = 0.15
+                        WHERE SpecialOfferID = 10 ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-10 Update : Używając drugiej tabelki jako źródła danych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        UPDATE &#x3C;table_or_view_name | table_or_view_alias&#x3E;
+                            SET column_name = {expression | DEFAULT | NULL} [ ,...n ]
+                            FROM &#x3C;table_source&#x3E;
+                            WHERE &#x3C;search_condition&#x3E;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-10 Update : Używając drugiej tabelki jako źródła danych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        UPDATE c
+                        SET Quantity = 2,
+                        ModifiedDate = GETDATE()
+                        FROM Sales.ShoppingCartItem c
+                        INNER JOIN Production.Product p
+                        ON c.ProductID = p.ProductID
+                        WHERE p.Name = 'Full-Finger Gloves, M '
+                        AND c.Quantity > 2 ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-11 Update : Aktualizacja i zwórcenie rekordów które się zmieniły</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        UPDATE Sales.SpecialOffer
+                        SET DiscountPct *= 1.05
+                        OUTPUT inserted.SpecialOfferID,
+                        deleted.DiscountPct AS old_DiscountPct,
+                        inserted.DiscountPct AS new_DiscountPct
+                        WHERE Category = 'Customer' ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-11 Update : Aktualizacja i zwórcenie rekordów które się zmieniły</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        UPDATE Sales.SpecialOffer
+                        SET DiscountPct *= 1.05
+                        OUTPUT inserted.SpecialOfferID,
+                        deleted.DiscountPct AS old_DiscountPct,
+                        inserted.DiscountPct AS new_DiscountPct
+                        WHERE Category = 'Customer' ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide cream  compact">
+        <h2>10-12 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+        <ol>
+            <li class="next">varchar(max)</li>
+            <li class="next">nvarchar(max)</li>
+            <li class="next">varbinary(max)</li>
+            <li class="next">Te typy danych mogą zajmować 2^31-1 bajtów czyli 2GB</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-12 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        UPDATE &#x3C;table_or_view_name&#x3E;
+                        SET column_name.WRITE (expression, (@Offset, @Length)
+                        FROM &#x3C;table_source&#x3E;
+                        WHERE &#x3C;search_condition&#x3E;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-12 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        CREATE TABLE dbo.RecipeChapter
+                        (
+                        ChapterID INT NOT NULL CONSTRAINT PK_RecipeChapter PRIMARY KEY CLUSTERED,
+                        Chapter VARCHAR(MAX) NOT NULL
+                        ) ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-13 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        INSERT INTO dbo.RecipeChapter
+                        (ChapterID,
+                        Chapter)
+                        VALUES (1,
+                        'At the beginning of each chapter you will notice
+                        that basic concepts are covered first.') ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-13 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        UPDATE dbo.RecipeChapter
+                        SET Chapter.WRITE('In addition to the basics, this chapter will also provide recipes
+                        that can be used in your day to day development and administration.',
+                        NULL, NULL)
+                        WHERE ChapterID = 1 ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-13 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        UPDATE dbo.RecipeChapter
+                        SET Chapter.WRITE('daily', CHARINDEX('day to day', Chapter) - 1,
+                        LEN('day to day'))
+                        WHERE ChapterID = 1 ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-13 Update : Zmiana GIGATYCZNYCH wartości w kolumnach</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        SELECT Chapter
+                        FROM dbo.RecipeChapter
+                        WHERE ChapterID = 1;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-13 Delete : Kasowanie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        DELETE Production.Example_ProductProductPhoto ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-13 Delete : Kasowanie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        DELETE Production.Example_ProductProductPhoto
+                        WHERE ProductID NOT IN (SELECT ProductID
+                        FROM Production.Product) ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-14 Delete : Kasowanie wierszy i zwórcenie skasowanych rekordów</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        DELETE
+                        FROM HumanResources.Example_JobCandidate
+                        OUTPUT deleted.JobCandidateID
+                        WHERE JobCandidateID < 5 ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-15 Delete : Kasowanie wierszy szybko (Truncating)</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        //TRUNCATE TABLE table_name ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-16 Merge : (Inserting, Updating, and/or Deleting
+                    Values)</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        MERGE
+                        [ INTO ] &#x3C;target_table&#x3E; [ [ AS ] table_alias ]
+                        USING &#x3C;table_source&#x3E; [ [ AS ] table_alias ]
+                        ON &#x3C;merge_search_condition&#x3E;
+                        [ WHEN MATCHED [ AND &#x3C;clause_search_condition&#x3E; ]
+                            THEN &#x3C;merge_matched&#x3E; ] [ ...n ]
+                            [ WHEN NOT MATCHED [ BY TARGET ] [ AND &#x3C;clause_search_condition&#x3E; ]
+                            THEN &#x3C;merge_not_matched&#x3E; ]
+                            [ WHEN NOT MATCHED BY SOURCE [ AND &#x3C;clause_search_condition&#x3E; ]
+                            THEN &#x3C;merge_matched&#x3E; ] [ ...n ]
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-16 Merge : (Inserting, Updating, and/or Deleting
+                    Values)</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        CREATE TABLE Sales.LastCustomerOrder
+                        (
+                        CustomerID INT,
+                        SalesOrderID INT,
+                        CONSTRAINT pk_LastCustomerOrder PRIMARY KEY CLUSTERED (CustomerId)
+                        ) ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-16 Merge : (Inserting, Updating, and/or Deleting
+                    Values)</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        DECLARE @CustomerID INT = 100,
+                        @SalesOrderID INT = 101 ;
+
+                        MERGE INTO Sales.LastCustomerOrder AS tgt
+                        USING
+                        (SELECT @CustomerID AS CustomerID,
+                        @SalesOrderID AS SalesOrderID
+                        ) AS src
+                        ON tgt.CustomerID = src.CustomerID
+                        WHEN MATCHED
+                        THEN UPDATE
+                        SET SalesOrderID = src.SalesOrderID
+                        WHEN NOT MATCHED
+                        THEN INSERT (
+                        CustomerID,
+                        SalesOrderID
+                        )
+                        VALUES (src.CustomerID,
+                        src.SalesOrderID) ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-16 Merge : (Inserting, Updating, and/or Deleting
+                    Values)</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        CREATE TABLE Sales.LargestCustomerOrder
+                        (
+                        CustomerID INT,
+                        SalesOrderID INT,
+                        TotalDue MONEY,
+                        CONSTRAINT pk_LargestCustomerOrder PRIMARY KEY CLUSTERED (CustomerId)
+                        );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">10-17  Umieszczanie danych po OUTPUT</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        -- Create a table variable to hold the output data
+                        -- This could be a temporary or a permanent table.
+                        DECLARE @dml_output TABLE (
+                        MergeAction VARCHAR(6),
+                        DeletedCustomerID INTEGER,
+                        DeletedSalesOrderID INTEGER,
+                        DeletedTotalDue MONEY,
+                        InsertedCustomerID INTEGER,
+                        InsertedSalesOrderID INTEGER,
+                        InsertedTotalDue MONEY
+                        );
+                        -- Insert into the holding table
+                        INSERT INTO @dml_output
+                        (MergeAction,
+                        DeletedCustomerID,
+                        DeletedSalesOrderID,
+                        DeletedTotalDue,
+                        InsertedCustomerID,
+                        InsertedSalesOrderID,
+                        InsertedTotalDue
+                        )
+                        -- SELECT from a table source
+                        SELECT *
+                        -- The FROM clause needs to be a derived table
+                        -- The output columns are its output. FROM (
+                        MERGE INTO Sales.LargestCustomerOrder AS tgt
+                        USING
+                        (SELECT 100 AS CustomerID,
+                        205 AS SalesOrderID,
+                        2500.00 AS TotalDue
+                        ) AS src
+                        ON tgt.CustomerID = src.CustomerID
+                        WHEN MATCHED AND tgt.TotalDue < src.TotalDue
+                        THEN UPDATE
+                        SET SalesOrderID = src.SalesOrderID
+                        , TotalDue = src.TotalDue
+                        WHEN NOT MATCHED
+                        THEN INSERT (
+                        CustomerID,
+                        SalesOrderID,
+                        TotalDue
+                        )
+                        VALUES (src.CustomerID,
+                        src.SalesOrderID,
+                        src.TotalDue)
+                        OUTPUT
+                        $ACTION,
+                        DELETED.*,
+                        INSERTED.*
+                        -- Define the derived table's output column
+                        ) dt(MergeAction,
+                        DeletedCustomerID,
+                        DeletedSalesOrderID,
+                        DeletedTotalDue,
+                        InsertedCustomerID,
+                        InsertedSalesOrderID,
+                        InsertedTotalDue);
+                        SELECT *
+                        FROM @dml_output;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
 
 
 
