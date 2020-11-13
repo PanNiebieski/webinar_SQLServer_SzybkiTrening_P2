@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>SQL Server Problemy, Zapytania, Rozwiązania</title>
+    <title>SQL Server Szybki trening 2</title>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width" />
@@ -16,7 +16,7 @@
 </head>
 <body class="shower list">
     <header class="caption">
-        <h1>SQL Server Szybki trening</h1>
+        <h1>SQL Server Szybki trening 2</h1>
         <p></p>
     </header>
 
@@ -60,7 +60,7 @@
         </ol>
     </section>
 
-    <section class="slide creamB">
+    <section class="slide creamP">
         <span class="shout colors"><span>6. Zaawansowana Zapytania SELECT
         </span></span>
     </section>
@@ -168,7 +168,7 @@
         </div>
     </section>
     <section class="slide creamB">
-        <span class="shout colors">6-0<span>Zapytania z gotowymi wynikami
+        <span class="shout colors">6-0<br /><span>Zapytania z gotowymi wynikami
         </span></span>
     </section>
 
@@ -180,6 +180,7 @@
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 40px !important;">
+
                         SELECT *
                         FROM (VALUES ('George', 'Washington'),
                         ('Thomas', 'Jefferson'),
@@ -445,8 +446,8 @@
                 <h2 class="headerCODE">6-3-5 Wysłanie rekordów do funkcji</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 26px !important;">
                         SELECT TOP (5)
                         w.WorkOrderID,
                         w.OrderQty,
@@ -536,8 +537,8 @@
                 <h2 class="headerCODE">6-5-1 Zmiana wierszy na kolumny</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                <pre style="font-size: 19px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height:19px !important;">
                         SELECT ShiftName,
                         Production,
                         Engineering,
@@ -627,7 +628,7 @@
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                    <code style="line-height: 31px !important;">
                         SELECT s.Name AS ShiftName,
                             SUM(CASE WHEN d.Name = 'Production' THEN 1 ELSE 0 END) AS Production,
                             SUM(CASE WHEN d.Name = 'Engineering' THEN 1 ELSE 0 END) AS Engineering,
@@ -663,8 +664,8 @@
                 <h2 class="headerCODE">6-6 Zmiana kolumn na wiersze</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 25px !important;">
                         IF OBJECT_ID('tempdb.dbo.#Contact') IS NOT NULL DROP TABLE #Contact;
                         CREATE TABLE #Contact
                         (
@@ -699,8 +700,8 @@
                 <h2 class="headerCODE">6-6-2 Zmiana kolumn na wiersze</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                <pre style="font-size: 41px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 50px !important;">
                         SELECT EmployeeID,
                             [PhoneNumber1],
                             [PhoneNumber2],
@@ -740,7 +741,8 @@
                         UNPIVOT
                         (
                             PhoneValue
-                            FOR PhoneType IN ([PhoneNumber1], [PhoneNumber2], [PhoneNumber3])
+                            FOR PhoneType IN ([PhoneNumber1], [PhoneNumber2], 
+                            [PhoneNumber3])
                         ) AS p;
                     </code>
                 </pre>
@@ -767,8 +769,8 @@
                 <h2 class="headerCODE">6-6-4 Zmiana kolumn na wiersze</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 25px !important;">
                         SELECT EmployeeID,
                         'PhoneNumber1' AS PhoneType,
                         c.PhoneNumber1 AS PhoneValue
@@ -811,7 +813,7 @@
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                    <code style="line-height: 31px !important;">
                         WITH cte AS
                         (
                             SELECT SalesOrderID
@@ -882,8 +884,8 @@
                 <h2 class="headerCODE">6-7-2 Używanie zapytań ponownie</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 11px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 10px !important;">
+                <pre style="font-size: 39px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 39px !important;">
                         WITH CTE(N, D) AS
                         (
                             SELECT TOP (5) object_id, type_desc
@@ -923,8 +925,8 @@
                 <h2 class="headerCODE">6-7-2 Używanie zapytań ponownie</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 11px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 10px !important;">
+                <pre style="font-size: 29px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 29px !important;">
                         WITH VendorSearch(RowNumber, VendorName, AccountNumber) AS
                         (
                             SELECT ROW_NUMBER() OVER (ORDER BY Name) RowNum,
@@ -959,8 +961,8 @@
                 <h2 class="headerCODE">6-8-1 Zapytania na tabelkach rekurecyjnych</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 25px !important;">
                         IF OBJECT_ID('tempdb.dbo.#Company') IS NOT NULL DROP TABLE #Company;
                         CREATE TABLE #Company
                         (
@@ -1005,8 +1007,8 @@
                 <h2 class="headerCODE">6-8-2 Zapytania na tabelkach rekurecyjnych</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                <pre style="font-size: 18px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 17px !important;">
                         WITH CompanyTree(ParentCompanyID, CompanyID, CompanyName, CompanyLevel) AS
                         (
                             -- Anchor Member
@@ -1058,14 +1060,14 @@
                 <h2 class="headerCODE">6-6-3 Zapytania na tabelkach rekurecyjnych</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                <pre style="font-size: 41px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 40px !important;">
                         SELECT ParentCompanyID,
                         CompanyID,
                         CompanyName,
                         CompanyLevel
                         FROM CompanyTree
-                       option (MaxRecursion  5)
+                        option (MaxRecursion  5)
                     </code>
                 </pre>
             </div>
@@ -1080,17 +1082,196 @@
         </div>
     </section>
  
-    <section class="slide creamB">
+    <section class="slide creamP">
         <span class="shout colors"><span>7. Window function i słowo kluczowe OVER
         </span></span>
     </section>
     <section class="slide creamB">
-        <span class="shout colors"><span>Window Function pozwala twojemu zapytaniu SQL spojrzeć na podzbiór wierszy,
+        <span class="shout colors " style="font-size: 190% !important;"><span>Window Function pozwala twojemu zapytaniu SQL spojrzeć na podzbiór wierszy,
+            które są zwracane przez zapytanie zanim funkcja agregująca zadziała na te wiersze
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-2 Grupowanie podstawy z groupby</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT AVG(Grade) AS AvgGrade,
+                        AVG(DISTINCT Grade) AS AvgDistinctGrade,
+                        MAX(Grade) AS MaxGrade,
+                        MIN(Grade) AS MinGrade
+                        FROM (VALUES (1, 100),
+                        (1, 99),
+                        (1, 99),
+                        (1, 98),
+                        (1, 99),
+                        (1, 32),
+                        (2, 77),
+                        (2, 56),
+                        (2, 88),
+                        (2, 60),
+                        (2, 80)
+                        ) dt (StudentId, Grade)
+            
+                        GROUP BY StudentId
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-01.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">7-0-0 Grupowanie podstawy z groupby</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT 
+                        StudentId,Grade
+                        FROM (VALUES (1, 100),
+                       (1, 99),
+                       (1, 99),
+                       (1, 98),
+                       (1, 99),
+                       (1, 32),
+                       (2, 77),
+                       (2, 56),
+                       (2, 88),
+                       (2, 60),
+                       (2, 80)
+                       ) dt (StudentId, Grade)
+                                   
+                       GROUP BY StudentId
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-02.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">7-0-0 Grupowanie podstawy z groupby</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT 
+                        StudentId,
+                        AVG(Grade) OVER (ORDER BY StudentId) 
+                        FROM (VALUES (1, 100),
+                        (1, 99),
+                        (1, 99),
+                        (1, 98),
+                        (1, 99),
+                        (1, 32),
+                        (2, 77),
+                        (2, 22),
+                        (2, 88),
+                        (2, 60),
+                        (2, 80)
+                        ) dt (StudentId, Grade)
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-03.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">7-0-0 Grupowanie podstawy z groupby</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT 
+                        StudentId,
+                        AVG(Grade) OVER (ORDER BY StudentId) 
+                        FROM (VALUES (11, 100),
+                        (1, 99),
+                        (2, 99),
+                        (3, 98),
+                        (4, 99),
+                        (5, 32),
+                        (6, 77),
+                        (7, 22),
+                        (8, 88),
+                        (9, 60),
+                        (10, 80)
+                        ) dt (StudentId, Grade)
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-04.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors " style="font-size: 190% !important;"><span>Window Function pozwala twojemu zapytaniu SQL spojrzeć na podzbiór wierszy,
             które są zwracane przez zapytanie zanim funkcja agregująca zadziała na te wiersze
         </span></span>
     </section>
     <section class="slide creamB">
-        <span class="shout colors"><span>W ten sposób funkcje pozwalają tobie określeć odpowiednią kolejność danych, które mają trafić do pewnej operacji<span>
+        <span class="shout colors"  style="font-size: 190% !important;"><span>W ten sposób funkcje pozwalają tobie określeć odpowiednią kolejność danych, które mają trafić do pewnej operacji<span>
         </span></span>
     </section>
     <section class="slide prism over bhgry">
@@ -1102,7 +1283,8 @@
                 <pre style="font-size: 40px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 40px !important;">
                         SELECT duration_seconds,
-                        SUM(duration_seconds) OVER (ORDER BY start_time) 
+                        SUM(duration_seconds) OVER 
+                        (ORDER BY start_time) 
                         AS running_total
                         FROM dc_bikeshare_q1_2012
                     </code>
@@ -1118,13 +1300,12 @@
             </div>
         </div>
     </section>
-    
     <section class="slide creamB">
         <span class="shout colors"><span>Lepsze to niż : self-join czy iterację po pętli
         </span></span>
     </section>
     <section class="slide creamB">
-        <span class="shout colors"><span>Czyli Windows Function pozwala tobie kontrolować kolejność danych które mają trafić do funkcji agregującej
+        <span class="shout colors"  style="font-size: 190% !important;"><span>Czyli Windows Function pozwala tobie kontrolować kolejność danych które mają trafić do funkcji agregującej
         </span></span>
     </section>
     <section class="slide creamB  compact">
@@ -1144,11 +1325,102 @@
             <li class="next">ROW_NUMBER, RANK, DENSE_RANK, NTILE</li>
         </ol>
     </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">7-0-0 Grupowanie podstawy z groupby</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT 
+                        StudentId,
+                        RANK()  OVER (ORDER BY Grade) AS RANK,
+                        DENSE_RANK() OVER (ORDER BY Grade) AS DENSE_RANK,
+                        ROW_NUMBER() OVER (ORDER BY Grade) AS ROW_NUMBER,
+                        AVG(Grade) OVER (ORDER BY Grade) AS AVGGrade
+                        FROM (VALUES (11, 100),
+                        (1, 99),
+                        (2, 99),
+                        (3, 98),
+                        (4, 99),
+                        (5, 32),
+                        (6, 77),
+                        (7, 22),
+                        (8, 88),
+                        (9, 60),
+                        (10, 80)
+                        ) dt (StudentId, Grade)
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-05.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide creamB  compact">
         <h2>Funkcje analityczne, a Offset functions</h2>
         <ol class="nonumbers">
             <li class="next">LAG, LEAD, FIRST_VALUE, i LAST_VALUE</li>
         </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-2 Grupowanie podstawy z groupby</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT 
+                        StudentId,
+                        LAG(Grade,1)  OVER (ORDER BY Grade) AS PreviousGrade,
+                        LEAD(Grade,1) OVER (ORDER BY Grade) AS NextGrade,
+                        FIRST_VALUE(Grade) OVER (ORDER BY Grade) AS FirstGrade,
+                        LAST_VALUE(Grade)  OVER (ORDER BY Grade) AS LastGrade
+                        FROM (VALUES (11, 100),
+                        (1, 99),
+                        (2, 99),
+                        (3, 98),
+                        (4, 99),
+                        (5, 32),
+                        (6, 77),
+                        (7, 22),
+                        (8, 88),
+                        (9, 60),
+                        (10, 80)
+                        ) dt (StudentId, Grade)
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-06.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
     </section>
     <section class="slide creamB">
         <span class="shout colors">7-1<br /><span>Kalkulacje na podstawie kolejności wierszy
@@ -1163,11 +1435,12 @@
             <div class="PlaceCodeHere">
                 <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 21px !important;">
+
                         CREATE TABLE #Transactions
                         (
-                        AccountId INTEGER,
-                        TranDate DATE,
-                        TranAmt NUMERIC(8, 2)
+                            AccountId INTEGER,
+                            TranDate DATE,
+                            TranAmt NUMERIC(8, 2)
                         );
                         INSERT INTO #Transactions
                         SELECT *
@@ -1241,6 +1514,78 @@
                 <h2 class="headerCODE">7-1-2 Kalkulacje na podstawie kolejności wierszy</h2>
             </div>
             <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT AccountId,
+                        TranDate,
+                        TranAmt,
+                        -- running total of all transactions
+                        RunTotalAmt = SUM(TranAmt) 
+                        OVER (ORDER BY TranDate)
+                        FROM #Transactions AS t
+                        ORDER BY AccountId,
+                        TranDate;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-067.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-1-3 Kalkulacje na podstawie kolejności wierszy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT AccountId,
+                        TranDate,
+                        TranAmt,
+                        -- running total of all transactions
+                        RunTotalAmt = SUM(TranAmt) 
+                        OVER (ORDER BY TranDate)
+                        FROM #Transactions AS t
+                        ORDER BY 
+                        RunTotalAmt;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-07.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-1-3 Kalkulacje na podstawie kolejności wierszy</h2>
+            </div>
+            <div class="PlaceCodeHere">
                 <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 28px !important;">
                         SELECT AccountId,
@@ -1271,11 +1616,43 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">7-1-3 Kalkulacje na podstawie kolejności wierszy</h2>
+                <h2 class="headerCODE">7-1-4 Przykład</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 40px !important;">
+                        OVER (
+                            [ &#x3C;PARTITION BY clause&#x3E; ]
+                            [ &#x3C;ORDER BY clause&#x3E; ]
+                            [ &#x3C;ROW or RANGE clause&#x3E; ]
+                        )
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-08.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-1-3 Kalkulacje na podstawie kolejności wierszy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 20px !important;">
                         SELECT AccountId,
                         TranDate,
                         TranAmt,
@@ -1289,6 +1666,7 @@
                         RunLargeAmt = MAX(TranAmt) OVER (PARTITION BY AccountId ORDER BY TranDate),
           
                         RunTotalAmt = SUM(TranAmt) OVER (PARTITION BY AccountId ORDER BY TranDate)
+
                         FROM #Transactions AS t
                         WHERE AccountID = 1
                         ORDER BY AccountId, TranDate;
@@ -1305,9 +1683,41 @@
             </div>
         </div>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-09.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide creamB">
         <span class="shout colors">7-2<br /><span>Kalkulacje na obecnym wierszu i dwówch poprzednich
         </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-2-0 Przykład</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        OVER (
+                            [ &#x3C;PARTITION BY clause&#x3E; ]
+                            [ &#x3C;ORDER BY clause&#x3E; ]
+                            [ &#x3C;ROW or RANGE clause&#x3E; ]
+                        )
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
     </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
@@ -1316,7 +1726,7 @@
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                    <code style="line-height: 24px !important;">
                         SELECT AccountId,
                         TranDate,
                         TranAmt,
@@ -1351,36 +1761,11 @@
 
     <section class="slide" style="background-color:black">
         <figure>
-            <img class="cover" src="pictures/_09-SQL.PNG" alt="blog">
+            <img class="cover" src="pictures/example-10.PNG" alt="blog">
             <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
         </figure>
     </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">7-0 Przykład</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
-                        OVER (
-                            [ &#x3C;PARTITION BY clause&#x3E; ]
-                            [ &#x3C;ORDER BY clause&#x3E; ]
-                            [ &#x3C;ROW or RANGE clause&#x3E; ]
-                        )
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
+
     <section class="slide creamB">
         <span class="shout colors">7-3<br /><span>Kalkulacje na podstawie procentu całości
         </span></span>
@@ -1391,13 +1776,18 @@
                 <h2 class="headerCODE">7-3 Kalkulacje na podstawie procentu całości</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                <pre style="font-size: 38px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 38px !important;">
                         SELECT AccountId,
                         TranDate,
                         TranAmt,
-                        AccountTotal = SUM(TranAmt) OVER (PARTITION BY AccountId),
-                        AmountPct = TranAmt / SUM(TranAmt) OVER (PARTITION BY t.AccountId)
+
+                        AccountTotal = SUM(TranAmt) 
+                        OVER (PARTITION BY AccountId),
+
+                        AmountPct = TranAmt / SUM(TranAmt) 
+                        OVER (PARTITION BY t.AccountId)
+
                         FROM #Transactions AS t
                     </code>
                 </pre>
@@ -1474,14 +1864,17 @@
                 <h2 class="headerCODE">7-6 Generowanie kolumny z liczbą wierszy </h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 40px !important;">
                         SELECT TOP 10
                         AccountNumber,
                         OrderDate,
                         TotalDue,
-                        ROW_NUMBER() OVER (PARTITION BY AccountNumber ORDER BY OrderDate) 
+
+                        ROW_NUMBER() OVER 
+                        (PARTITION BY AccountNumber ORDER BY OrderDate) 
                         AS RowNumber
+
                         FROM AdventureWorks2014.Sales.SalesOrderHeader
                         ORDER BY AccountNumber;
                     </code>
@@ -1513,8 +1906,9 @@
                 <h2 class="headerCODE">7-7 Użycie logicznego Okna</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 20px !important;">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 26x !important;">
+
                         CREATE TABLE #Test
                         (
                             RowID INT IDENTITY,
@@ -1548,9 +1942,9 @@
     <section class="slide creamB  compact">
         <h2>Framing options</h2>
         <ol class="nonumbers">
-            <li class="next">ROWS : </li>
-            <li class="next">RANGE : </li>
-            <li class="next">UNBOUNDED PRECEDING : </li>
+            <li class="next">ROWS : od wierszy</li>
+            <li class="next">RANGE : od zakresu wartości</li>
+            <li class="next">UNBOUNDED PRECEDING : i nie wiążemy ich</li>
         </ol>
     </section>
 
@@ -1560,13 +1954,15 @@
                 <h2 class="headerCODE">7-7-1 Użycie logicznego Okna</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 20px !important;">
+                <pre style="font-size: 29px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 29px !important;">
                         SELECT RowID,
                         FName,
                         Salary,
-                        SumByRows = SUM(Salary) OVER (ORDER BY Salary ROWS UNBOUNDED PRECEDING),
-                        SumByRange = SUM(Salary) OVER (ORDER BY Salary RANGE  PRECEDING)
+                        SumByRows = SUM(Salary) 
+                        OVER (ORDER BY Salary ROWS UNBOUNDED PRECEDING),
+                        SumByRange = SUM(Salary) 
+                        OVER (ORDER BY Salary RANGE UNBOUNDED PRECEDING)
                         FROM #Test
                         ORDER BY RowID;
                     </code>
@@ -1582,14 +1978,42 @@
             </div>
         </div>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-11.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide creamB">
         <span class="shout colors">7-8<br /><span>Zwracanie wierszy poprzez ich range
         </span></span>
     </section>
+    <section class="slide creamB  compact">
+        <h2>Ranking functions : Funkcje rankingowe</h2>
+        <ol class="nonumbers">
+            <li class="next">RANK : Podobne do Row_NUMBER() jednakże jeżeli napotkamy taką samą wartość w partycji to wartość pozostaje taka sama. 
+                Jednakże następna wartość będzie już zinkremetowana po powtarzalnych wartościach
+            </li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Ranking functions : Funkcje rankingowe</h2>
+        <ol class="nonumbers">
+            <li class="next">DENSE_RANK :Podobne do Row_NUMBER() jednakże jeżeli napotkamy taką samą wartość w partycji to wartość pozostaje taka sama. 
+                Jednakże następna wartość będzie już zinkremetowana</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Ranking functions : Funkcje rankingowe</h2>
+        <ol class="nonumbers">
+            <li class="next">NTILE : NTILE dzieli rezultat na spefyciczne ponumerowane grupy bazujące na kolejności opcjonalnego wyrażenia ORDER</li>
+        </ol>
+    </section>
+
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">7-7 Zwracanie wierszy poprzez ich range </h2>
+                <h2 class="headerCODE">7-8 Zwracanie wierszy poprzez ich range </h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
@@ -1617,7 +2041,7 @@
     </section>
     <section class="slide" style="background-color:black">
         <figure>
-            <img class="cover" src="pictures/_12-SQL.PNG" alt="blog">
+            <img class="cover" src="pictures/example-12.PNG" alt="blog">
             <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
         </figure>
     </section>
@@ -1628,25 +2052,15 @@
     <section class="slide creamB  compact">
         <h2>Ranking functions : Funkcje rankingowe</h2>
         <ol class="nonumbers">
-            <li class="next">RANK : Podobne do Row_NUMBER() jednakże jeżeli napotkamy taką samą wartość w partycji to wartość pozostaje taka sama. 
-                Jednakże następna wartość będzie już zinkremetowana po powtarzalnych wartościach
-            </li>
-        </ol>
-    </section>
-    <section class="slide creamB  compact">
-        <h2>Ranking functions : Funkcje rankingowe</h2>
-        <ol class="nonumbers">
-            <li class="next">DENSE_RANK :Podobne do Row_NUMBER() jednakże jeżeli napotkamy taką samą wartość w partycji to wartość pozostaje taka sama. 
-                Jednakże następna wartość będzie już zinkremetowana</li>
-        </ol>
-    </section>
-    <section class="slide creamB  compact">
-        <h2>Ranking functions : Funkcje rankingowe</h2>
-        <ol class="nonumbers">
             <li class="next">NTILE : NTILE dzieli rezultat na spefyciczne ponumerowane grupy bazujące na kolejności opcjonalnego wyrażenia ORDER</li>
         </ol>
     </section>
-
+    <section class="slide creamB  compact">
+        <h2>Ranking functions : Funkcje rankingowe</h2>
+        <ol class="nonumbers">
+            <li class="next">NTILE : czyli służy do podziału elementów na n-tyle (np. NTILE(4) = kwartyle ).</li>
+        </ol>
+    </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
@@ -1680,6 +2094,40 @@
             <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
         </figure>
     </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-8-1 Sortowanie rekordów do podgrup : podziel sprzedaże na 4 grupy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 29px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 28px !important;">
+                        SELECT AccountId,
+                        TranDate,
+                        TranAmt,
+						NTILE(4) OVER (ORDER BY TranAmt DESC) AS [NTILE]
+                        FROM #Transactions AS t
+                        ORDER BY [NTILE],
+                        TranDate;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-14.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide creamB">
         <span class="shout colors">7-9<br /><span>Znajdowanie luk
         </span></span>
@@ -1687,7 +2135,8 @@
     <section class="slide creamB  compact">
         <h2>Funkcje analityczne, a Offset functions</h2>
         <ol class="nonumbers">
-            <li class="next">LAG, LEAD, FIRST_VALUE, i LAST_VALUE</li>
+            <li class="next">LAG, LEAD</li>
+            <li class="next">FIRST_VALUE, i LAST_VALUE</li>
         </ol>
     </section>
     <section class="slide creamB  compact">
@@ -1702,8 +2151,8 @@
                 <h2 class="headerCODE">7-9 Znajdowanie luk</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                <pre style="font-size: 20px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 20px !important;">
                         CREATE TABLE #Gaps (col1 INTEGER PRIMARY KEY CLUSTERED);
 
                         INSERT INTO #Gaps (col1)
@@ -1752,12 +2201,7 @@
         <span class="shout colors">7-10<br /><span>Porównanie danych z poprzedniego miesiąca
         </span></span>
     </section>
-    <section class="slide creamB  compact">
-        <h2>Funkcje analityczne, a Offset functions</h2>
-        <ol class="nonumbers">
-            <li class="next">LAG, LEAD, FIRST_VALUE, i LAST_VALUE</li>
-        </ol>
-    </section>
+
     <section class="slide creamB  compact">
         <h2>Analytic functions : Funkcje analityczne</h2>
         <ol class="nonumbers">
@@ -1770,8 +2214,8 @@
                 <h2 class="headerCODE">7-10 Lag example</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 20px !important;">
                         WITH cte_netsales_2018 AS(
                             SELECT 
                                 month, 
@@ -1783,6 +2227,7 @@
                             GROUP BY 
                                 month
                         )
+
                         SELECT 
                             month,
                             net_sales,
@@ -1809,12 +2254,7 @@
         <span class="shout colors">7-11<br /><span>Pobieranie pierwszej i ostatniej wartośći z partycji
         </span></span>
     </section>
-    <section class="slide creamB  compact">
-        <h2>Funkcje analityczne, a Offset functions</h2>
-        <ol class="nonumbers">
-            <li class="next">LAG, LEAD, FIRST_VALUE, i LAST_VALUE</li>
-        </ol>
-    </section>
+
     <section class="slide creamB  compact">
         <h2>Analytic functions : Funkcje analityczne</h2>
         <ol class="nonumbers">
@@ -1857,7 +2297,12 @@
             </div>
         </div>
     </section>
-
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/example-15.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
 
     <!-- <section class="slide prism over bhgry">
         <div class="grid-container">
@@ -2274,7 +2719,7 @@
         <span class="shout colors"><span>8. Transakcje, Blokady i DeadLocki
         </span></span>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Transakcje</h2>
         <ol class="nonumbers">
             <li class="next">Atomicity : Transakcje działają na zasadzie wszystko, albo nic</li>
@@ -2283,12 +2728,14 @@
             <li class="next">Durability : Zmiana po zatwierdzeniu działa</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Swoją drogą  istnieje możliwość włączenia 
             NIEJAWNYCH transakcji dla poleceń</h2>
         <ol class="nonumbers">
-            <li class="next">ALTER TABLE, FETCH, REVOKE, CREATE, GRANT, SELECT, DELETE,
-                INSERT, TRUNCATE TABLE, DROP, OPEN, and UPDATE</li>
+            <li class="next">ALTER TABLE, FETCH, REVOKE, CREATE, </li>
+                <li class="next">GRANT, SELECT, DELETE,
+                    INSERT, TRUNCATE TABLE</li>
+                    <li class="next">DROP, OPEN, and UPDATE</li>
         </ol>
     </section>
     <section class="slide prism over bhgry">
@@ -2319,14 +2766,14 @@
         <span class="shout colors"><span>Jawne transakcje są lepsze
         </span></span>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Polecenia transakcyjne</h2>
         <ol class="nonumbers">
             <li class="next">BEGIN TRANSACTION : punkt startowy tranzakcji</li>
             <li class="next">ROLLBACK TRANSACTION : cofnięcie wszystkich operacji wewnątrz tranzakcji</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Polecenia transakcyjne</h2>
         <ol class="nonumbers">
             <li class="next">COMMIT TRANSACTION : potwierdź tranzakcje </li>
@@ -2334,7 +2781,7 @@
                 TRANSACTION : rozpoczniji tranzakcje dla wielu serwerów przy użyciu Microsoft Distributed Transaction Coordinator</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Polecenia transakcyjne</h2>
         <ol class="nonumbers">
             <li class="next">SAVE TRANSACTION : zapisz punkt tranzakcji do którego można wrócić</li>
@@ -2638,40 +3085,40 @@
         <span class="shout colors">8-4<br /><span>Zobaczmy aktywność blokującą
         </span></span>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Locking</h2>
         <ol class="nonumbers">
             <li class="next">Shared lock : Dane mogą być odczytane, ale niezmienione gdy ten lock istnieje</li>
             <li class="next">Intent lock : Tworzy on kolejkę która ustala kolejność połączeń jak ich prawa do odczytu i zapisu</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Locking</h2>
         <ol class="nonumbers">
             <li class="next">Update lock : Jeżeli jest modyfikacja ten lock staje się Exclusive lock. Jeżeli tak nie jest to staje się on Shared Lock</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Locking</h2>
         <ol class="nonumbers">
             <li class="next">Exclusive lock: Blokuje on jakikolwiek dostęp. Może on działać niejawnie przy INSET,DELETE, UPDATE</li>
             <li class="next">Schema modification : Lock gdy modyfikujesz schemat tabelki</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Locking</h2>
         <ol class="nonumbers">
             <li class="next">Key-range : Lock blokujący wybrany zakres rekordów bazując na kluczu. Jeżeli robisz UPDATE między rokiem 2011-2012 to te rekordy będą zablokowane</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Locking</h2>
         <ol class="nonumbers">
             <li class="next">Schema stability : Lock który się tworzy w trakcie kompilacji zapytania. Blokuje on zmiany schemy na tabelce</li>
             <li class="next">Bulk update : Lock dla dużych operacji kopiowania. Operacje te są szybkie, ale redukują one współbieżność w danej tabeli</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SQL Server Lock Resources</h2>
         <ol class="nonumbers">
             <li class="next">Allocation unit : Zbiory pages</li>
@@ -2679,7 +3126,7 @@
             <li class="next">Database : całą bazę danych</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SQL Server Lock Resources</h2>
         <ol class="nonumbers">
             <li class="next">Extent : Alokacja 8 przyległych 8KB danych lub index pages</li>
@@ -2687,7 +3134,7 @@
             <li class="next">HOBT : Sterta (tabela bez clustered index czy b-tree)</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SQL Server Lock Resources</h2>
         <ol class="nonumbers">
             <li class="next">Metadata : System metadanych</li>
@@ -2695,14 +3142,14 @@
             <li class="next">Page : 8kb blok danych albo page index</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SQL Server Lock Resources</h2>
         <ol class="nonumbers">
             <li class="next">Key : Blokowanie wierszy tak aby nie było fantomowych odczytów. Zwany również jako key-range-lock</li>
             <li class="next">Table : Tabelka</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SQL Server Lock Resources</h2>
         <ol class="nonumbers">
             <li class="next">RID : Blokowanie wiersza</li>
@@ -2724,7 +3171,7 @@
         <span class="shout colors">Jak to działa?<span>
         </span></span>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Jak to działa?</h2>
         <ol class="nonumbers">
             <li class="next">Locki zajmują przestrzeń w pamięci</li>
@@ -2732,7 +3179,7 @@
             <li class="next">Cierpi na tym współbieżność</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Jak to działa?</h2>
         <ol class="nonumbers">
             <li class="next">Możesz zablokować eskalację lock lub ustawić jego poziom</li>
@@ -2837,7 +3284,7 @@
         </div>
     </section>
 
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>LOCK_ESCALATION =</h2>
         <ol class="nonumbers">
             <li class="next">TABLE : Domyślna.Eskalacja do poziomu tabelki . Całej bezwględu na to czy jest ona partycjonowana</li>
@@ -2877,14 +3324,14 @@
         <span class="shout colors">8-6<br /><span>Konfiguracja poziomu sesji transakcynej
         </span></span>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>ANSI/ISO SQL definiuje 4 typy interakcji pomiędzy tranzakcjami</h2>
         <ol class="nonumbers">
             <li class="next">Dirty reads: Następuje gdy transakcje aktualizuje wiersz, a druga transakcja go odczyta zanim pierwsza transakcja się zakończy lub stwierdzi, że chce cofnąć swoją transakcje</li>
             <li class="next">Nonrepeatable reads: Różne wyniki otrzymamy w zależności od tego czy przeczytamy dane przed czy po UPDATE</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>ANSI/ISO SQL definiuje 4 typy interakcji pomiędzy tranzakcjami</h2>
         <ol class="nonumbers">
             <li class="next">Phantom reads: Wykonujemy dwa takie same odczyty. W międzyczasie kasujemy rekord i to sprawia, że dwa odczyty dają różne rezultaty</li>
@@ -2919,7 +3366,7 @@
             </div>
         </div>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SQL Server Isolation Levelsi</h2>
         <ol class="nonumbers">
             <li class="next">READ COMMITTED (domyślny) : Nie potwierdzone dane nie są odczytywane. S
@@ -2963,13 +3410,13 @@
             </div>
         </div>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SQL Server Isolation Levelsi</h2>
         <ol class="nonumbers">
             <li class="next">READ UNCOMMITTED : To najmniej restrekcyjny lock. Użyteczny gdy chcesz skorzystać z transakcji na danych które wiesz, że są operowane tylko przez Ciebie</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SQL Server Isolation Levelsi</h2>
         <ol class="nonumbers">
             <li class="next">REPEATABLE READ : Odczyty są blokowane. Insert,Update,Delete mogą być wykonane na zbiorze na którym transakcja nie operuje</li>
@@ -3010,7 +3457,7 @@
             </div>
         </div>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SQL Server Isolation Levelsi</h2>
         <ol class="nonumbers">
             <li class="next">SERIALIZABLE : Najbardziej restrykcyjny. Range lock jest umieszczony na podstawie rezutatu wyszukiwania. Kasowanie,Aktualizacje są blokowane</li>
@@ -3049,7 +3496,7 @@
             </div>
         </div>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SQL Server Isolation Levels</h2>
         <ol class="nonumbers">
             <li class="next">SNAPSHOT : Każda transakcja ma swoją kopie na której może pracować</li>
@@ -3355,14 +3802,14 @@
         <span class="shout colors"><span>Blokowanie
         </span></span>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Dlaczego blokowanie może nastąpić</h2>
         <ol class="nonumbers">
             <li class="next">Jeżeli tabelka nie ma indeksów wtedy SQL Server może blokować całą tabelkę</li>
             <li class="next">Aplikacja trzyma transakcje otwartą czekaja na interakcje z użytkownikiem</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Dlaczego blokowanie może nastąpić</h2>
         <ol class="nonumbers">
             <li class="next">Zapytanie ustawia lock na całej tabelce mimo iż operują na kilku rekordach</li>
@@ -3392,7 +3839,7 @@
         </div>
     </section>
 
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>KILL Command Arguments</h2>
         <ol class="nonumbers">
             <li class="next">SPID : ID Sesji którą chcemy zamknać</li>
@@ -3649,7 +4096,7 @@
         <span class="shout colors"><span>Deadlock
         </span></span>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Jak Deadlock może nastąpić?</h2>
         <ol class="nonumbers">
             <li class="next">Aplikacja sięga do tabelek za każdym razem w innej kolejności. Zakładając, że masz takie dwie sesje to mogą one wzajemnie się zablokować</li>
@@ -3686,7 +4133,7 @@
             </div>
         </div>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>DBCC TRACEON Command Arguments</h2>
         <ol class="nonumbers">
             <li class="next">trace# : flaga do śledzenia</li>
@@ -3716,7 +4163,7 @@
             </div>
         </div>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>DBCC TRACESTATUS Command Arguments</h2>
         <ol class="nonumbers">
             <li class="next">trace# [,...n ]]: flaga do śledzenia</li>
@@ -3746,7 +4193,7 @@
             </div>
         </div>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>DBCC TRACEOFF Command Arguments</h2>
         <ol class="nonumbers">
             <li class="next">trace# [,...n ]]: flaga do wyłączenia</li>
@@ -4039,7 +4486,7 @@
             </div>
         </div>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>SET DEADLOCK_PRIORITY Command Arguments</h2>
         <ol class="nonumbers">
             <li class="next">LOW : Ustawiasz obecne połączenie jako niski powód do deadlock-ui>
@@ -4091,49 +4538,49 @@
         <span class="shout colors"><span>9. Pracowanie ze stringami
         </span></span>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Pracowanie ze stringami</h2>
         <ol class="nonumbers">
             <li class="next">CONCAT : Łączy napisy</li>
             <li class="next">ASCII and CHAR : ASCII bierze znak najbardziej po lewej i zwraca kod ASCII. CHAR konwertuje liczbę ASCII na znak</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Pracowanie ze stringami</h2>
         <ol class="nonumbers">
             <li class="next">CHARINDEX and PATINDEX : CHARINDEX zwraca indeks początku jednego napisu w drugim. PATINDEX działa podobnie, ale możesz użyć wild card</li>
             <li class="next">DIFFERENCE and SOUNDEX : Sprawdzenie czy napisy są róźne i czy brzmią tak samo</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Pracowanie ze stringami</h2>
         <ol class="nonumbers">
             <li class="next">FORMAT: MOdyfikuje DATE/TIME na string</li>
             <li class="next">LEFT and RIGHT: Zwraca część napisu zaczynając od liczby znaków od lewej</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Pracowanie ze stringami</h2>
         <ol class="nonumbers">
             <li class="next">LEN and DATALENGTH: LEN zwraca liczbę znaków w napisie pomijając białe znaki po ostatnim zanku. DATALENGHT zwraca liczbę bajtów użytych. </li>
             <li class="next">LOWER and UPPER : Zmiana wielości napisu</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Pracowanie ze stringami</h2>
         <ol class="nonumbers">
             <li class="next">LTRIM and RTRIM : Usuwa białe znaki</li>
             <li class="next">NCHAR and UNICODE : UNICODE zwraca liczbę całkowitą dla pierwszego znaku. NCHAR przyjmmuje liczbę całkowitą UNICODE i zwarca znak</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Pracowanie ze stringami</h2>
         <ol class="nonumbers">
             <li class="next">QUOTENAME : Zwraca UNICODE i dodadaje delimiter aby był to okej dla SQL Server</li>
             <li class="next">REPLACE : Zastępuje jeden napis drugim</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Pracowanie ze stringami</h2>
         <ol class="nonumbers">
             <li class="next">REPLICATE : Powtarza dany znak wiele razy</li>
@@ -4141,7 +4588,7 @@
 
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Pracowanie ze stringami</h2>
         <ol class="nonumbers">
 
@@ -4149,7 +4596,7 @@
             <li class="next">STR : Zmienia numeryczną dane na string</li>
         </ol>
     </section>
-    <section class="slide creamGrey  compact">
+    <section class="slide creamB  compact">
         <h2>Pracowanie ze stringami</h2>
         <ol class="nonumbers">
             <li class="next">STUFF : Kasuje w określonym miejscu teskt i wstawia nowy</li>
