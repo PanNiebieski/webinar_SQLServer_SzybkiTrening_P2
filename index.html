@@ -88,6 +88,12 @@
             </div>
         </div>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_02.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
@@ -116,6 +122,12 @@
             </div>
         </div>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_03.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
@@ -142,6 +154,12 @@
             </div>
         </div>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_03.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
@@ -167,6 +185,12 @@
             </div>
         </div>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_04.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide creamB">
         <span class="shout colors">6-0<br /><span>Zapytania z gotowymi wynikami
         </span></span>
@@ -180,19 +204,10 @@
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 40px !important;">
-
                         SELECT *
-                        FROM (VALUES ('George', 'Washington'),
-                        ('Thomas', 'Jefferson'),
-                        ('John', 'Adams'),
-                        ('James', 'Madison'),
-                        ('James', 'Monroe'),
-                        ('John Quincy', 'Adams'),
-                        ('Andrew', 'Jackson'),
-                        ('Martin', 'Van Buren'),
-                        ('William', 'Harrison'),
-                        ('John', 'Tyler')
-                        ) dtPresidents(FirstName, LastName);
+                        FROM (VALUES ('Adam', 'Walkuz'),
+                        ('Stefan', 'Jefferson'))
+                         dtPeople(FirstName, LastName);
                     </code>
                 </pre>
             </div>
@@ -221,9 +236,11 @@
                     <code style="line-height: 40px !important;">
                         DECLARE @FirstHireDate DATE,
                         @LastHireDate DATE;
+
                         SELECT @FirstHireDate = MIN(HireDate),
                         @LastHireDate = MAX(HireDate)
                         FROM HumanResources.Employee;
+
                         SELECT @FirstHireDate AS FirstHireDate,
                         @LastHireDate AS LastHireDate;
                     </code>
@@ -283,8 +300,8 @@
     <section class="slide creamB   compact ">
         <h2>Limity</h2>
         <ol class="nonumbers">
-            <li class="next">Nie możesz tworzyć nowych tabel w innej instancji serwera</li>
-            <li class="next">Nie możesz tworzyć tak zmiennej tabeli</li>
+            <li class="next">Nie możesz tworzyć  nowych tabel w innej instancji serwera</li>
+            <li class="next">Nie możesz tworzyć tak zmiennej TABLE</li>
             <li class="next">Tylko dane i columny są skopiowane. Indexy,Triggery,Klucze obce nie są skopiowane</li>
         </ol>
     </section>
@@ -313,12 +330,12 @@
                             RETURNS TABLE
                             AS
                             RETURN
-                            SELECT WorkOrderID,
-                            ProductID,
-                            OperationSequence,
-                            LocationID
-                            FROM Production.WorkOrderRouting
-                            WHERE WorkOrderID = @WorkOrderID;
+                                SELECT WorkOrderID,
+                                ProductID,
+                                OperationSequence,
+                                LocationID
+                                FROM Production.WorkOrderRouting
+                                WHERE WorkOrderID = @WorkOrderID;
                         GO
 
                         SELECT TOP (5)
@@ -327,7 +344,7 @@
                         r.ProductID,
                         r.OperationSequence
                         FROM Production.WorkOrder w
-                        CROSS APPLY dbo.fn_WorkOrderRouting(w.WorkOrderID) AS r
+                            CROSS APPLY dbo.fn_WorkOrderRouting(w.WorkOrderID) AS r
                         ORDER BY w.WorkOrderID,
                         w.OrderQty,
                         r.ProductID;
@@ -344,106 +361,13 @@
             </div>
         </div>
     </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-3-1 Wysłanie rekordów do funkcji</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 26px !important;">
-                        INSERT INTO Production.WorkOrder
-                            (ProductID,
-                            OrderQty,
-                            ScrappedQty,
-                            StartDate,
-                            EndDate,
-                            DueDate,
-                            ScrapReasonID,
-                            ModifiedDate)
-                        VALUES (1,
-                        1,
-                        1,
-                        GETDATE(),
-                        GETDATE(),
-                        GETDATE(),
-                        1,
-                        GETDATE());
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
+
+
+
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
                 <h2 class="headerCODE">6-3-2 Wysłanie rekordów do funkcji</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 29px !important;">
-                        SELECT w.WorkOrderID,
-                        w.OrderQty,
-                        r.ProductID,
-                        r.OperationSequence
-                        FROM Production.WorkOrder AS w
-                        CROSS APPLY dbo.fn_WorkOrderRouting(w.WorkOrderID) AS r
-                        WHERE w.WorkOrderID IN (SELECT MAX(WorkOrderID)
-                        FROM Production.WorkOrder);
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-3-4 Wysłanie rekordów do funkcji</h2>
-            </div>
-            <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 40px !important;">
-                        SELECT w.WorkOrderID,
-                        w.OrderQty,
-                        r.ProductID,
-                        r.OperationSequence
-                        FROM Production.WorkOrder AS w
-                        OUTER APPLY dbo.fn_WorkOrderRouting(w.WorkOrderID) AS r
-                        WHERE w.WorkOrderID IN (SELECT MAX(WorkOrderID)
-                        FROM Production.WorkOrder);
-                    </code>
-                </pre>
-            </div>
-            <div class="AnswerCode">
-                <div class="pytanie">
-                    <h3></h3>
-                </div>
-                <div class="odpowiedz">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slide prism over bhgry">
-        <div class="grid-container">
-            <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-3-5 Wysłanie rekordów do funkcji</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
@@ -454,12 +378,13 @@
                         r.ProductID,
                         r.OperationSequence
                         FROM Production.WorkOrder w
-                        CROSS APPLY (SELECT WorkOrderID,
-                        ProductID,
-                        OperationSequence,
-                        LocationID
-                        FROM Production.WorkOrderRouting
-                        WHERE WorkOrderID = w.WorkOrderId
+                        CROSS APPLY (
+                            SELECT WorkOrderID,
+                            ProductID,
+                            OperationSequence,
+                            LocationID
+                            FROM Production.WorkOrderRouting
+                            WHERE WorkOrderID = w.WorkOrderId
                         ) AS r
                         ORDER BY w.WorkOrderID,
                         w.OrderQty,
@@ -477,8 +402,6 @@
             </div>
         </div>
     </section>
-
-
     <section class="slide creamB">
         <span class="shout colors">6-4<br /><span>Zmiana wierszy na kolumny
         </span></span>
@@ -497,6 +420,7 @@
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 40px !important;">
+
                         SELECT s.Name AS ShiftName,
                         h.BusinessEntityID,
                         d.Name AS DepartmentName
@@ -527,18 +451,15 @@
             <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
         </figure>
     </section>
-    <section class="slide creamB">
-        <span class="shout colors">6-5<br /><span>Zmiana wierszy na kolumny
-        </span></span>
-    </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-5-1 Zmiana wierszy na kolumny</h2>
+                <h2 class="headerCODE">6-4-2 Zmiana wierszy na kolumny</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 19px;overflow: hidden;  " class="language-sql">
                     <code style="line-height:19px !important;">
+
                         SELECT ShiftName,
                         Production,
                         Engineering,
@@ -576,14 +497,20 @@
             </div>
         </div>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_05.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-5-2 Zmiana wierszy na kolumny</h2>
+                <h2 class="headerCODE">6-4-3 Zmiana wierszy na kolumny</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 50px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 50px !important;">
+                <pre style="font-size: 40px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
                         FROM table_source
                         PIVOT ( aggregate_function ( value_column )
                         FOR pivot_column
@@ -606,7 +533,7 @@
         <h2>Argumenty PIVOT</h2>
         <ol class="nonumbers">
             <li class="next"><span class="green">table_source :</span> źródło danych do sworzenia (pivoted) </li>
-            <li class="next"><span class="green">aggregate_function :</span> Funkcja uzyta na poszczególnej kolumny</li>
+            <li class="next"><span class="green">aggregate_function :</span> Funkcja użyta na poszczególnej kolumnie</li>
             <li class="next"><span class="green">value_column :</span> Ta kolumna będzie użyta w agregacji</li>
         </ol>
     </section>
@@ -624,11 +551,11 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-5-3 Zmiana wierszy na kolumny</h2>
+                <h2 class="headerCODE">6-4-4 Zmiana wierszy na kolumny</h2>
             </div>
             <div class="PlaceCodeHere">
-                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
-                    <code style="line-height: 31px !important;">
+                <pre style="font-size: 29px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 29px !important;">
                         SELECT s.Name AS ShiftName,
                             SUM(CASE WHEN d.Name = 'Production' THEN 1 ELSE 0 END) AS Production,
                             SUM(CASE WHEN d.Name = 'Engineering' THEN 1 ELSE 0 END) AS Engineering,
@@ -654,14 +581,20 @@
             </div>
         </div>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_05.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide creamB">
-        <span class="shout colors">6-6<br /><span>Zmiana wierszy na kolumny
+        <span class="shout colors">6-5<br /><span>Zmiana wierszy na kolumny
         </span></span>
     </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-6 Zmiana kolumn na wiersze</h2>
+                <h2 class="headerCODE">6-5 Zmiana kolumn na wiersze</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
@@ -697,7 +630,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-6-2 Zmiana kolumn na wiersze</h2>
+                <h2 class="headerCODE">6-5-2 Zmiana kolumn na wiersze</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 41px;overflow: hidden;  " class="language-sql">
@@ -729,7 +662,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-6-3 Zmiana kolumn na wiersze</h2>
+                <h2 class="headerCODE">6-5-3 Zmiana kolumn na wiersze</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
@@ -766,7 +699,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-6-4 Zmiana kolumn na wiersze</h2>
+                <h2 class="headerCODE">6-5-4 Zmiana kolumn na wiersze</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
@@ -803,13 +736,13 @@
         </div>
     </section>
     <section class="slide creamB">
-        <span class="shout colors">6-7<br /><span>Używanie zapytań ponownie
+        <span class="shout colors">6-6<br /><span>Używanie zapytań ponownie
         </span></span>
     </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">6-7 Używanie zapytań ponownie</h2>
+                <h2 class="headerCODE">6-6 Używanie zapytań ponownie</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
@@ -906,10 +839,10 @@
         </div>
     </section>
     <section class="slide creamB  compact">
-        <h2>Mamy dwa typy CTE</h2>
+        <h2>Mamy dwa typy Common Table Expression</h2>
         <ol class="nonumbers">
-            <li class="next">Rekurecyjne</li>
-            <li class="next">Nie rekurencyjne</li>
+            <li class="next">Rekurencyjne</li>
+            <li class="next">Nie Rekurencyjne</li>
         </ol>
     </section>
     <section class="slide creamB  compact">
@@ -949,6 +882,12 @@
                 </div>
             </div>
         </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_06.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
     </section>
     <section class="slide creamB">
         <span class="shout colors">6-8<br /><span>Zapytania na tabelkach rekurecyjnych
@@ -1049,9 +988,9 @@
         </div>
     </section>
     <section class="slide creamB  compact">
-        <h2>Mamy dwa typy CTE</h2>
+        <h2>Głębia</h2>
         <ol class="nonumbers">
-            <li class="next">Głębia rekursji wynosi maksymalnie 100</li>
+            <li class="next">Głębia rekursji domyślnie wynosi maksymalnie 100</li>
         </ol>
     </section>
     <section class="slide prism over bhgry">
@@ -1067,7 +1006,7 @@
                         CompanyName,
                         CompanyLevel
                         FROM CompanyTree
-                        option (MaxRecursion  5)
+                        option (MaxRecursion  2)
                     </code>
                 </pre>
             </div>
@@ -1085,6 +1024,12 @@
     <section class="slide creamP">
         <span class="shout colors"><span>7. Window function i słowo kluczowe OVER
         </span></span>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_08.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
     </section>
     <section class="slide creamB">
         <span class="shout colors " style="font-size: 190% !important;"><span>Window Function pozwala twojemu zapytaniu SQL spojrzeć na podzbiór wierszy,
@@ -1232,6 +1177,52 @@
                 <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 24px !important;">
                         SELECT 
+                        Distinct StudentId,
+                        AVG(Grade) OVER (ORDER BY StudentId) 
+                        FROM (VALUES (1, 100),
+                        (1, 99),
+                        (1, 99),
+                        (1, 98),
+                        (1, 99),
+                        (1, 32),
+                        (2, 77),
+                        (2, 22),
+                        (2, 88),
+                        (2, 60),
+                        (2, 80)
+                        ) dt (StudentId, Grade)
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_09.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors " style="font-size: 190% !important;"><span>Dodajmy więcej studentów bo nic z tego okna nie widać
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">7-0-0 Grupowanie podstawy z groupby</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT 
                         StudentId,
                         AVG(Grade) OVER (ORDER BY StudentId) 
                         FROM (VALUES (11, 100),
@@ -1284,9 +1275,9 @@
                     <code style="line-height: 40px !important;">
                         SELECT duration_seconds,
                         SUM(duration_seconds) OVER 
-                        (ORDER BY start_time) 
+                        (ORDER BY id) 
                         AS running_total
-                        FROM dc_bikeshare_q1_2012
+                        FROM [demo].[dbo].[Runinng]
                     </code>
                 </pre>
             </div>
@@ -1300,12 +1291,50 @@
             </div>
         </div>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_11.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-0 PRZYKŁAD</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 40px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT duration_seconds,
+                        SUM(duration_seconds) OVER 
+                        (ORDER BY  id DESC)
+                        AS running_total
+                        FROM [demo].[dbo].[Runinng]
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_12.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide creamB">
         <span class="shout colors"><span>Lepsze to niż : self-join czy iterację po pętli
         </span></span>
     </section>
     <section class="slide creamB">
-        <span class="shout colors"  style="font-size: 190% !important;"><span>Czyli Windows Function pozwala tobie kontrolować kolejność danych które mają trafić do funkcji agregującej
+        <span class="shout colors"  style="font-size: 190% !important;"><span>Window Function pozwala tobie kontrolować kolejność danych które mają trafić do funkcji agregującej
         </span></span>
     </section>
     <section class="slide creamB  compact">
@@ -1368,6 +1397,12 @@
     <section class="slide" style="background-color:black">
         <figure>
             <img class="cover" src="pictures/example-05.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_13.PNG" alt="blog">
             <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
         </figure>
     </section>
@@ -1647,6 +1682,12 @@
             <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
         </figure>
     </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_14.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
@@ -1764,6 +1805,12 @@
     <section class="slide" style="background-color:black">
         <figure>
             <img class="cover" src="pictures/example-10.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/f_15.PNG" alt="blog">
             <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
         </figure>
     </section>
@@ -1948,7 +1995,7 @@
         <ol class="nonumbers">
             <li class="next"><span class="green">ROWS :</span> od wierszy</li>
             <li class="next"><span class="green">RANGE :</span> od zakresu wartości</li>
-            <li class="next"><span class="green">UNBOUNDED PRECEDING :</span> i nie wiążemy ich</li>
+            <li class="next"><span class="green">UNBOUNDED PRECEDING :</span>wszystkie rekordy od początku ramki</li>
         </ol>
     </section>
 
@@ -2719,21 +2766,21 @@
         </div>
     </section> -->
 
-    <section class="slide creamB">
+    <section class="slide creamP">
         <span class="shout colors"><span>8. Transakcje, Blokady i DeadLocki
         </span></span>
     </section>
     <section class="slide creamB  compact">
-        <h2>Transakcje</h2>
+        <h2>Transakcje. Zasada ACID</h2>
         <ol class="nonumbers">
             <li class="next">Atomicity : Transakcje działają na zasadzie wszystko, albo nic</li>
             <li class="next">Consistency : Dane są prawidłowe przed i po transakcji</li>
             <li class="next">Isolation : Transakcja nie jest zależna od innych transakcji</li>
-            <li class="next">Durability : Zmiana po zatwierdzeniu działa</li>
+            <li class="next">Durability : Zmiana istnieje po zatwierdzeniu działania</li>
         </ol>
     </section>
     <section class="slide creamB  compact">
-        <h2>Swoją drogą  istnieje możliwość włączenia 
+        <h2>Swoją drogą  istnieje możliwość wyłączenia 
             NIEJAWNYCH transakcji dla poleceń</h2>
         <ol class="nonumbers">
             <li class="next">ALTER TABLE, FETCH, REVOKE, CREATE, </li>
@@ -3336,7 +3383,7 @@
         <h2>ANSI/ISO SQL definiuje 4 typy interakcji pomiędzy tranzakcjami</h2>
         <ol class="nonumbers">
             <li class="next"><span class="green">Dirty reads :</span> Następuje gdy transakcje aktualizuje wiersz, a druga transakcja go odczyta zanim pierwsza transakcja się zakończy lub stwierdzi, że chce cofnąć swoją transakcje</li>
-            <li class="next"><span class="green">Nonrepeatable reads :</span> Różne wyniki otrzymamy w zależności od tego czy przeczytamy dane przed czy po UPDATE</li>
+            <li class="next"><span class="green">Nonrepeatable reads :</span>Jedna sesja odczytuje dane przed i po UPDATED. Dopóki ta sesja trwa wartość jest taka sama nawet po Commicie Transakcji</li>
         </ol>
     </section>
     <section class="slide creamB  compact">
@@ -3375,7 +3422,7 @@
         </div>
     </section>
     <section class="slide creamB  compact">
-        <h2>SQL Server Isolation Levelsi</h2>
+        <h2>SQL Server Isolation Levels</h2>
         <ol class="nonumbers">
             <li class="next"><span class="green">READ COMMITTED (domyślny) :</span> Nie potwierdzone dane nie są odczytywane. S
                 hared lock jest używany.
@@ -3394,12 +3441,53 @@
                         session1> BEGIN;
                         session1> SELECT firstname FROM names WHERE id = 7;
                         Aaron
+
+                        session2> UPDATE names SET firstname = 'Bob' WHERE id = 7;
+                        session2> SELECT firstname FROM names WHERE id = 7;
+                        Bob
+                        session1> SELECT firstname FROM names WHERE id = 7;
+                        ................
+                        session2> COMMIT;
+                        session1> 
+                        Bob
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>SQL Server Isolation Levelsi</h2>
+        <ol class="nonumbers">
+            <li class="next"><span class="green">READ UNCOMMITTED :</span> To najmniej restrekcyjny lock. Użyteczny gdy chcesz skorzystać z transakcji na danych które wiesz, że są operowane tylko przez Ciebie</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-6 READ UNCOMMITTED</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 28px !important;">
+                        session1> BEGIN;
+                        session1> SELECT firstname FROM names WHERE id = 7;
+                        Aaron
                         
                         session2> BEGIN;
                         session2> SELECT firstname FROM names WHERE id = 7;
                         Aaron
                         session2> UPDATE names SET firstname = 'Bob' WHERE id = 7;
                         session2> SELECT firstname FROM names WHERE id = 7;
+                        Bob
+                        session1> SELECT firstname FROM names WHERE id = 7;
                         Bob
                         session2> COMMIT;
                         
@@ -3421,13 +3509,7 @@
     <section class="slide creamB  compact">
         <h2>SQL Server Isolation Levelsi</h2>
         <ol class="nonumbers">
-            <li class="next"><span class="green">READ UNCOMMITTED :</span> To najmniej restrekcyjny lock. Użyteczny gdy chcesz skorzystać z transakcji na danych które wiesz, że są operowane tylko przez Ciebie</li>
-        </ol>
-    </section>
-    <section class="slide creamB  compact">
-        <h2>SQL Server Isolation Levelsi</h2>
-        <ol class="nonumbers">
-            <li class="next"><span class="green">REPEATABLE READ :</span> Odczyty są blokowane. Insert,Update,Delete mogą być wykonane na zbiorze na którym transakcja nie operuje</li>
+            <li class="next"><span class="green">REPEATABLE READ :</span> </li>
         </ol>
     </section>
     <section class="slide prism over bhgry">
@@ -3491,6 +3573,7 @@
                         session2> ...
                         
                         session1> END;
+                        session2> UPDATE Done
                     </code>
                 </pre>
             </div>
@@ -3518,6 +3601,7 @@
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 28px !important;">
+                        --pierwsze okno
                         USE AdventureWorks2014;
                         GO
                         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
@@ -3543,11 +3627,12 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-6 Kontrolowanie Lock na Tabelce</h2>
+                <h2 class="headerCODE">8-6-1 Konfiguracja poziomu sesji transakcynej</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
                     <code style="line-height: 28px !important;">
+                        --drugie okno
                         SELECT resource_associated_entity_id, resource_type,
                         request_mode, request_session_id
                         FROM sys.dm_tran_locks;
@@ -3568,7 +3653,33 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-6 Konfiguracja sesji transakcynej</h2>
+                <h2 class="headerCODE">8-6-2 Konfiguracja poziomu sesji transakcynej</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 28px !important;">
+                        --TRZECIE okno
+                        Update Person.AddressType
+                        SET Name = 'T'
+                        WHERE AddressTypeID = 1 
+                        GO
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-6-3 Konfiguracja sesji transakcynej</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
@@ -3601,7 +3712,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-6 Konfiguracja sesji transakcynej</h2>
+                <h2 class="headerCODE">8-6-5 Konfiguracja sesji transakcynej</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
@@ -3631,7 +3742,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-6 Kontrolowanie Lock na Tabelce</h2>
+                <h2 class="headerCODE">8-6-6 Kontrolowanie Lock na Tabelce</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
@@ -3803,7 +3914,7 @@
         </div>
     </section>
     <section class="slide creamB">
-        <span class="shout colors">8-7<br /><span>Szukanie blokady i jej usuowanie
+        <span class="shout colors">8-7<br /><span>Szukanie blokady i jej usuwanie
         </span></span>
     </section>
     <section class="slide creamB">
@@ -3827,7 +3938,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuowanie</h2>
+                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuwanie</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
@@ -3858,7 +3969,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuowanie</h2>
+                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuwanie</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
@@ -3886,7 +3997,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuowanie</h2>
+                <h2 class="headerCODE">8-7-2 Szukanie blokady i jej usuwanie</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
@@ -3914,7 +4025,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuowanie</h2>
+                <h2 class="headerCODE">8-7-3 Szukanie blokady i jej usuwanie</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
@@ -3979,7 +4090,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-7 Szukanie blokady i jej usuowanie</h2>
+                <h2 class="headerCODE">8-7-4 Szukanie blokady i jej usuowanie</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
@@ -4324,14 +4435,14 @@
                         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
                         WHILE 1=1
                         BEGIN
-                        BEGIN TRAN
-                        UPDATE Purchasing.Vendor
-                        SET CreditRating = 1
-                        WHERE BusinessEntityID = 1494;
-                        UPDATE Purchasing.Vendor
-                        SET CreditRating = 2
-                        WHERE BusinessEntityID = 1492;
-                        COMMIT TRAN
+                            BEGIN TRAN
+                                UPDATE Purchasing.Vendor
+                                SET CreditRating = 1
+                                WHERE BusinessEntityID = 1494;
+                                UPDATE Purchasing.Vendor
+                                SET CreditRating = 2
+                                WHERE BusinessEntityID = 1492;
+                            COMMIT TRAN
                         END
                     </code>
                 </pre>
@@ -4349,7 +4460,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-9 Szukanie deadlock-u poprzez Extended Events</h2>
+                <h2 class="headerCODE">8-9-2 Szukanie deadlock-u poprzez Extended Events</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
@@ -4361,13 +4472,13 @@
                         WHILE 1=1
                         BEGIN
                         BEGIN TRANSACTION
-                        UPDATE Purchasing.Vendor
-                        SET CreditRating = 2
-                        WHERE BusinessEntityID = 1492;
-                        UPDATE Purchasing.Vendor
-                        SET CreditRating = 1
-                        WHERE BusinessEntityID = 1494;
-                        COMMIT TRANSACTION
+                            UPDATE Purchasing.Vendor
+                            SET CreditRating = 2
+                            WHERE BusinessEntityID = 1492;
+                            UPDATE Purchasing.Vendor
+                            SET CreditRating = 1
+                            WHERE BusinessEntityID = 1494;
+                            COMMIT TRANSACTION
                         END
                     </code>
                 </pre>
@@ -4385,7 +4496,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-9 Szukanie deadlock-u poprzez Extended Events</h2>
+                <h2 class="headerCODE">8-9-3 Szukanie deadlock-u poprzez Extended Events</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
@@ -4421,7 +4532,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle"> 
-                <h2 class="headerCODE">8-9 Szukanie deadlock-u poprzez Extended Events</h2>
+                <h2 class="headerCODE">8-9-4 Szukanie deadlock-u poprzez Extended Events</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
@@ -4437,6 +4548,99 @@
                         AS Data
                         WHERE 
                         TargetData.value('(event/@name)[1]', 'varchar(50)') = 'xml_deadlock_report';
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-9-3 Szukanie deadlock-u poprzez Extended Events</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 16px;overflow: hidden;  " class="language-xml">
+                    <code style="line-height: 16px !important;">
+
+                        &#x3C;event name=&#x22;xml_deadlock_report&#x22; package=&#x22;sqlserver&#x22; timestamp=&#x22;2020-11-17T12:16:37.572Z&#x22;&#x3E;
+                        &#x3C;data name=&#x22;xml_report&#x22;&#x3E;
+                          &#x3C;value&#x3E;
+                            &#x3C;deadlock&#x3E;
+                              &#x3C;victim-list&#x3E;
+                                &#x3C;victimProcess id=&#x22;process177af683088&#x22; /&#x3E;
+                              &#x3C;/victim-list&#x3E;
+                              &#x3C;process-list&#x3E;
+                                &#x3C;process id=&#x22;process177af683088&#x22; taskpriority=&#x22;0&#x22; 
+                                logused=&#x22;144&#x22; waitresource=&#x22;KEY: 5:72057594049789952 (b4903b2250cc)&#x22; 
+                                waittime=&#x22;3521&#x22; ownerId=&#x22;468635&#x22; transactionname=&#x22;user_transaction&#x22; 
+                                lasttranstarted=&#x22;2020-11-17T13:16:34.050&#x22; XDES=&#x22;0x1779f36c428&#x22; 
+                                lockMode=&#x22;X&#x22; schedulerid=&#x22;7&#x22; kpid=&#x22;20452&#x22; 
+                                status=&#x22;suspended&#x22; spid=&#x22;56&#x22; sbid=&#x22;0&#x22; ecid=&#x22;0&#x22; 
+                                priority=&#x22;0&#x22; trancount=&#x22;2&#x22; lastbatchstarted=&#x22;2020-11-17T13:16:34.050&#x22; 
+                                lastbatchcompleted=&#x22;2020-11-17T13:16:34.047&#x22; lastattention=&#x22;1900-01-01T00:00:00.047&#x22; 
+                                clientapp=&#x22;Microsoft SQL Server Management Studio - Query&#x22; hostname=&#x22;CEZMSI&#x22; 
+                                hostpid=&#x22;1476&#x22; loginname=&#x22;CEZMSI\PanNiebieski&#x22; 
+                                isolationlevel=&#x22;read committed (2)&#x22; xactid=&#x22;468635&#x22; currentdb=&#x22;5&#x22; 
+                                currentdbname=&#x22;AdventureWorks2014&#x22; lockTimeout=&#x22;4294967295&#x22; 
+                                clientoption1=&#x22;673187936&#x22; clientoption2=&#x22;390200&#x22;&#x3E;
+                                  &#x3C;executionStack&#x3E;
+                                    &#x3C;frame procname=&#x22;adhoc&#x22; line=&#x22;8&#x22; stmtstart=&#x22;40&#x22; stmtend=&#x22;200&#x22; 
+                                    sqlhandle=&#x22;0x02000000eac1af36f412db4e21d9dcc86feb261fa6bcd2300000000000000000000000000000000000000000&#x22;&#x3E;
+                      unknown    &#x3C;/frame&#x3E;
+                                    &#x3C;frame procname=&#x22;adhoc&#x22; line=&#x22;8&#x22; stmtstart=&#x22;300&#x22; 
+                                    stmtend=&#x22;468&#x22; sqlhandle=&#x22;0x020000005312e433857f0fc42c7763c9f49c0ba8feeff51d0000000000000000000000000000000000000000&#x22;&#x3E;
+                      unknown    &#x3C;/frame&#x3E;
+                                  &#x3C;/executionStack&#x3E;
+                                  &#x3C;inputbuf&#x3E;
+
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">8-9-3 Szukanie deadlock-u poprzez Extended Events</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 16px;overflow: hidden;  " class="language-xml">
+                    <code style="line-height: 16px !important;">
+                        
+                        &#x3C;resource-list&#x3E;
+                        &#x3C;keylock hobtid=&#x22;72057594049789952&#x22; dbid=&#x22;5&#x22; objectname=&#x22;AdventureWorks2014.Purchasing.Vendor&#x22; indexname=&#x22;PK_Vendor_BusinessEntityID&#x22; id=&#x22;lock177a9200900&#x22; mode=&#x22;X&#x22; associatedObjectId=&#x22;72057594049789952&#x22;&#x3E;
+                          &#x3C;owner-list&#x3E;
+                            &#x3C;owner id=&#x22;process1779d5c88c8&#x22; mode=&#x22;X&#x22; /&#x3E;
+                          &#x3C;/owner-list&#x3E;
+                          &#x3C;waiter-list&#x3E;
+                            &#x3C;waiter id=&#x22;process177af683088&#x22; mode=&#x22;X&#x22; requestType=&#x22;wait&#x22; /&#x3E;
+                          &#x3C;/waiter-list&#x3E;
+                        &#x3C;/keylock&#x3E;
+                        &#x3C;keylock hobtid=&#x22;72057594049789952&#x22; dbid=&#x22;5&#x22; objectname=&#x22;AdventureWorks2014.Purchasing.Vendor&#x22; indexname=&#x22;PK_Vendor_BusinessEntityID&#x22; id=&#x22;lock177a9200b80&#x22; mode=&#x22;X&#x22; associatedObjectId=&#x22;72057594049789952&#x22;&#x3E;
+                          &#x3C;owner-list&#x3E;
+                            &#x3C;owner id=&#x22;process177af683088&#x22; mode=&#x22;X&#x22; /&#x3E;
+                          &#x3C;/owner-list&#x3E;
+                          &#x3C;waiter-list&#x3E;
+                            &#x3C;waiter id=&#x22;process1779d5c88c8&#x22; mode=&#x22;X&#x22; requestType=&#x22;wait&#x22; /&#x3E;
+                          &#x3C;/waiter-list&#x3E;
+                        &#x3C;/keylock&#x3E;
+                      &#x3C;/resource-list&#x3E;
                     </code>
                 </pre>
             </div>
